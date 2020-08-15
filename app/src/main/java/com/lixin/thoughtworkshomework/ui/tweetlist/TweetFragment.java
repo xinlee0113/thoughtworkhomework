@@ -13,12 +13,14 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.paging.PagedList;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.lixin.thoughtworkshomework.R;
 import com.lixin.thoughtworkshomework.repo.entity.ProfileEntity;
+import com.lixin.thoughtworkshomework.repo.entity.TweetEntity;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 
 import butterknife.BindView;
@@ -72,7 +74,7 @@ public class TweetFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         Log.i(TAG, "onCreateView");
-        View rootView = inflater.inflate(R.layout.fragment_tweets, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_tweet, container, false);
         butterKnifeBinder = ButterKnife.bind(this, rootView);
         return rootView;
     }
@@ -99,6 +101,13 @@ public class TweetFragment extends Fragment {
         TweetListAdapter adapter = new TweetListAdapter();
         ryTweetList.setAdapter(adapter);
         ryTweetList.setLayoutManager(new LinearLayoutManager(requireContext()));
+
+        tweetViewModel.getObservableTweetList("jsmith").observe(requireActivity(), new Observer<PagedList<TweetEntity>>() {
+            @Override
+            public void onChanged(PagedList<TweetEntity> pagedList) {
+                adapter.submitList(pagedList);
+            }
+        });
     }
 
     private void bindProfileDataToView() {

@@ -2,6 +2,7 @@ package com.lixin.thoughtworkshomework.repo;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MediatorLiveData;
+import androidx.paging.PagedList;
 
 import com.lixin.thoughtworkshomework.repo.entity.ProfileEntity;
 import com.lixin.thoughtworkshomework.repo.entity.TweetEntity;
@@ -53,7 +54,7 @@ public class Repository implements IDataSource {
     }
 
     @Override
-    public LiveData<List<TweetEntity>> getTweets(String userName) {
+    public LiveData<PagedList<TweetEntity>> getTweets(String userName) {
         return remoteDataSource.getTweets(userName);
     }
 }

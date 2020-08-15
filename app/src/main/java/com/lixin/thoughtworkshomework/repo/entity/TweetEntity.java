@@ -28,8 +28,8 @@ public class TweetEntity  {
     public String unknown_error;
 
     public static class Comment {
-        String content;
-        Sender sender;
+       public String content;
+       public Sender sender;
 
         @Override
         public String toString() {
@@ -52,9 +52,9 @@ public class TweetEntity  {
     }
 
     public static class Sender {
-        String username;
-        String nick;
-        String avatar;
+        public String username;
+        public String nick;
+        public String avatar;
 
         @Override
         public String toString() {

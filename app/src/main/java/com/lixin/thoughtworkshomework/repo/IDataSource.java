@@ -1,11 +1,10 @@
 package com.lixin.thoughtworkshomework.repo;
 
 import androidx.lifecycle.LiveData;
+import androidx.paging.PagedList;
 
 import com.lixin.thoughtworkshomework.repo.entity.ProfileEntity;
 import com.lixin.thoughtworkshomework.repo.entity.TweetEntity;
-
-import java.util.List;
 
 /**
  * @author lixin
@@ -15,5 +14,5 @@ public interface IDataSource {
 
     LiveData<ProfileEntity> getProfile(String userName);
 
-    LiveData<List<TweetEntity>> getTweets(String userName);
+    LiveData<PagedList<TweetEntity>> getTweets(String userName);
 }
