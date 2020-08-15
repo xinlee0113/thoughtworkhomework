@@ -4,7 +4,7 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.lixin.thoughtworkshomework.ui.TweetFragment;
+import com.lixin.thoughtworkshomework.ui.tweetlist.TweetFragment;
 
 /**
  * @author lixin

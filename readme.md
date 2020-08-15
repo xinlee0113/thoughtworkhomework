@@ -35,6 +35,7 @@ Json data specification
 1。 使用mvvm的设计模式
 2。 recycleview 、 retrofit 、jetpack
 3。 开发框架：https://developer.android.google.cn/jetpack/docs/guide
+4. PagedList:https://www.jianshu.com/p/ff5c711bb7a1
 
 
 

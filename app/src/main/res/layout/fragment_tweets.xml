@@ -35,9 +35,17 @@
         android:minWidth="60dp"
         android:text="Xin" />
 
-    <androidx.recyclerview.widget.RecyclerView
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/srl_tweet_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/img_avatar"
-        android:layout_marginTop="@dimen/dp_40" />
+        android:layout_marginTop="@dimen/dp_40">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/ry_tweet_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
 </RelativeLayout>
