@@ -1,5 +1,6 @@
 package com.lixin.thoughtworkshomework.repo.local.converter;
 
+import androidx.annotation.Nullable;
 import androidx.room.TypeConverter;
 
 import com.google.gson.Gson;
@@ -23,6 +24,7 @@ public class SenderConverter {
         return new Gson().toJson(list);
     }
 
+    @Nullable
     @TypeConverter
     public TweetEntity.Sender convertStringToSender(String json) {
         try {

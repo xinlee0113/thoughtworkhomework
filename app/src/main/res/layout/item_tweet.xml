@@ -8,58 +8,59 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-    <TextView
-        android:id="@+id/tv_id"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tv_tweet_content" />
+    <!--    <TextView-->
+    <!--        android:id="@+id/tv_id"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_below="@id/tv_tweet_content" />-->
 
-    <TextView
-        android:id="@+id/tv_user_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tv_id" />
+    <!--    <TextView-->
+    <!--        android:id="@+id/tv_user_name"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_below="@id/tv_id" />-->
 
-    <TextView
-        android:id="@+id/tv_error"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tv_user_name" />
+    <!--    <TextView-->
+    <!--        android:id="@+id/tv_error"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_below="@id/tv_user_name" />-->
 
-    <RelativeLayout
-        android:id="@+id/rl_tweet_sender"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tv_error">
+    <!--    <RelativeLayout-->
 
-        <TextView
-            android:id="@+id/tv_tweet_sender_user_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+    <!--        android:id="@+id/rl_tweet_sender"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_below="@id/tv_error">-->
 
-        <TextView
-            android:id="@+id/tv_tweet_sender_nick"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tv_tweet_sender_user_name" />
+    <!--        <TextView-->
+    <!--            android:id="@+id/tv_tweet_sender_user_name"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content" />-->
 
-        <ImageView
-            android:id="@+id/tv_tweet_sender_avatar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tv_tweet_sender_nick" />
-    </RelativeLayout>
+    <!--        <TextView-->
+    <!--            android:id="@+id/tv_tweet_sender_nick"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_below="@id/tv_tweet_sender_user_name" />-->
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/ry_tweet_comments"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tv_error" />
+    <!--        <ImageView-->
+    <!--            android:id="@+id/tv_tweet_sender_avatar"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_below="@id/tv_tweet_sender_nick" />-->
+    <!--    </RelativeLayout>-->
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/ry_twee_images"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/ry_tweet_comments" />
+    <!--    <androidx.recyclerview.widget.RecyclerView-->
+    <!--        android:id="@+id/ry_tweet_comments"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_below="@id/tv_error" />-->
+
+    <!--    <androidx.recyclerview.widget.RecyclerView-->
+    <!--        android:id="@+id/ry_twee_images"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_below="@+id/ry_tweet_comments" />-->
 
 </RelativeLayout>

@@ -29,18 +29,18 @@ import com.lixin.thoughtworkshomework.repo.local.dao.AppDataBase;
  */
 public class TweetApp extends Application {
 
-    private AppExecutors mAppExecutors;
     private static TweetApp sInstance;
+    private AppExecutors mAppExecutors;
+
+    public static TweetApp getInstance() {
+        return sInstance;
+    }
 
     @Override
     public void onCreate() {
         super.onCreate();
         mAppExecutors = new AppExecutors();
         sInstance = this;
-    }
-
-    public static TweetApp getInstance() {
-        return sInstance;
     }
 
     //

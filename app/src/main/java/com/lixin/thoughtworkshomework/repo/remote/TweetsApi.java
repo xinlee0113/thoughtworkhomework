@@ -1,5 +1,7 @@
 package com.lixin.thoughtworkshomework.repo.remote;
 
+import androidx.annotation.NonNull;
+
 import com.lixin.thoughtworkshomework.repo.entity.ProfileEntity;
 import com.lixin.thoughtworkshomework.repo.entity.TweetEntity;
 
@@ -16,13 +18,14 @@ import retrofit2.http.Path;
  * http://thoughtworks-ios.herokuapp.com/user/jsmith/tweets
  */
 public interface TweetsApi {
-    public static final String BASE_URL = "http://thoughtworks-ios.herokuapp.com";
+    String BASE_URL = "http://thoughtworks-ios.herokuapp.com";
 
     /**
      * @param userName 用户名
      * @return 用户信息
      * 获取用户信息
      */
+    @NonNull
     @GET("/user/{userName}")
     Observable<ProfileEntity> getProfile(@Path("userName") String userName);
 
@@ -32,6 +35,7 @@ public interface TweetsApi {
      * @return 朋友圈列表
      * 获取朋友圈列表信息
      */
+    @NonNull
     @GET("/user/{userName}/tweets")
     Observable<List<TweetEntity>> getTweets(@Path("userName") String userName);
 }

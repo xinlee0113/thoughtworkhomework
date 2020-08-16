@@ -15,7 +15,7 @@ import com.lixin.thoughtworkshomework.repo.entity.TweetEntity;
  */
 public class TweetViewModel extends ViewModel {
     private static final String TAG = "TweetViewModel";
-    Repository repository;
+    final Repository repository;
     LiveData<ProfileEntity> observableProfile;
     LiveData<PagedList<TweetEntity>> observableTweetList;
 

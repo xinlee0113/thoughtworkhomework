@@ -27,22 +27,25 @@ import io.reactivex.schedulers.Schedulers;
  */
 public class RemoteDataSource implements IDataSource {
     private static final String TAG = "RemoteDataSource";
+    final MutableLiveData<ProfileEntity> observableProfile = new MutableLiveData<>();
+    @NonNull
+    final LiveData<PagedList<TweetEntity>> observableTweetList;
 
     public RemoteDataSource() {
         PagedList.Config config = new PagedList.Config.Builder()
-                .setEnablePlaceholders(false)
+                .setEnablePlaceholders(true)
                 .setPageSize(5)  //分页大小
                 .setInitialLoadSizeHint(5)  //首次加载大小
                 .setPrefetchDistance(5)  //预加载距离：还剩5个就要滑到底了，就进行预加载
                 .build();
 
         DataSource.Factory<Integer, TweetEntity> mFactory = new DataSource.Factory<Integer, TweetEntity>() {
+            @NonNull
             @Override
             public DataSource<Integer, TweetEntity> create() {
                 return new PageKeyedDataSource<Integer, TweetEntity>() {
                     @Override
                     public void loadInitial(@NonNull LoadInitialParams<Integer> params, @NonNull LoadInitialCallback<Integer, TweetEntity> callback) {
-                        Log.i(TAG, "loadInitial,params placeholdersEnabled=" + params.placeholdersEnabled + ",params size" + params.requestedLoadSize);
                         TweetApiCreator.getInstance().create()
                                 .getTweets("jsmith")
                                 .subscribeOn(Schedulers.io())
@@ -54,7 +57,7 @@ public class RemoteDataSource implements IDataSource {
                                     }
 
                                     @Override
-                                    public void onNext(List<TweetEntity> tweetEntities) {
+                                    public void onNext(@NonNull List<TweetEntity> tweetEntities) {
 //                                        Log.i(TAG, "fetchTweetList onNext" + tweetEntities);
                                         List<TweetEntity> data = tweetEntities.subList(0, params.requestedLoadSize - 1);
                                         //前一页为0，后一页5
@@ -92,16 +95,11 @@ public class RemoteDataSource implements IDataSource {
                                     }
 
                                     @Override
-                                    public void onNext(List<TweetEntity> tweetEntities) {
-//                                        Log.i(TAG, "fetchTweetList onNext" + tweetEntities);
-                                        // 9 = 5 + 5 - 1 , data: 5-9 ,size:5 ,nextKey:10
-                                        //
-                                        int nextKey = params.key + params.requestedLoadSize;
-                                        int toPosition = nextKey -1 ;
-                                        List<TweetEntity> data = tweetEntities.subList(params.key, toPosition < tweetEntities.size() ? toPosition : tweetEntities.size() - 1);
-                                        callback.onResult(data, nextKey <tweetEntities.size()? nextKey :null);
-                                        Log.i(TAG,"loadAfter:total="+tweetEntities.size()+",currentKey="+params.key + ",data="+params.key+"~"+(params.key+params.requestedLoadSize-1)+",size="+params.requestedLoadSize+",nextKey="+(params.key+params.requestedLoadSize));
-
+                                    public void onNext(@NonNull List<TweetEntity> tweetEntities) {
+                                        Log.i(TAG, "params key=" + params.key + ",requestLoadSize=" + params.requestedLoadSize);
+                                        int subListTo = params.key + params.requestedLoadSize - 1;
+                                        List<TweetEntity> pagedList = tweetEntities.subList(params.key, subListTo < tweetEntities.size() ? subListTo : tweetEntities.size() - 1);
+                                        callback.onResult(pagedList, params.key + params.requestedLoadSize - 1 < tweetEntities.size() ? params.key + params.requestedLoadSize - 1 : tweetEntities.size() - 1);
                                     }
 
                                     @Override
@@ -118,17 +116,14 @@ public class RemoteDataSource implements IDataSource {
                 };
             }
         };
-        observableTweetList = new LivePagedListBuilder(mFactory, config).build();
+        observableTweetList = new LivePagedListBuilder<Integer, TweetEntity>(mFactory, config).build();
     }
 
-    MutableLiveData<ProfileEntity> observerbalProfile = new MutableLiveData<>();
-
-    LiveData<PagedList<TweetEntity>> observableTweetList;
-
+    @NonNull
     @Override
     public LiveData<ProfileEntity> getProfile(String userName) {
         fetchProfile(userName);
-        return observerbalProfile;
+        return observableProfile;
     }
 
     private void fetchProfile(String userName) {
@@ -145,7 +140,7 @@ public class RemoteDataSource implements IDataSource {
                     @Override
                     public void onNext(ProfileEntity profileEntity) {
 //                        Log.i(TAG, "fetchProfile onNext" + profileEntity);
-                        observerbalProfile.setValue(profileEntity);
+                        observableProfile.setValue(profileEntity);
                     }
 
                     @Override
@@ -160,6 +155,7 @@ public class RemoteDataSource implements IDataSource {
                 });
     }
 
+    @NonNull
     @Override
     public LiveData<PagedList<TweetEntity>> getTweets(String userName) {
         return observableTweetList;

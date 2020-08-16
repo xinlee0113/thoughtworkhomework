@@ -1,5 +1,6 @@
 package com.lixin.thoughtworkshomework.repo;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MediatorLiveData;
 import androidx.paging.PagedList;
@@ -16,21 +17,11 @@ import java.util.List;
  * @date 2020/8/14.
  */
 public class Repository implements IDataSource {
-    private static Repository sInstance ;
-    private AppDataBase dataBase;
-    private RemoteDataSource remoteDataSource;
+    private static Repository sInstance;
+    private final AppDataBase dataBase;
+    @NonNull
+    private final RemoteDataSource remoteDataSource;
     private MediatorLiveData<List<TweetEntity>> observableTweets;
-
-    public static Repository getInstance(final AppDataBase database) {
-        if (sInstance == null) {
-            synchronized (Repository.class) {
-                if (sInstance == null) {
-                    sInstance = new Repository(database);
-                }
-            }
-        }
-        return sInstance;
-    }
 
     private Repository(final AppDataBase database) {
         this.dataBase = database;
@@ -45,14 +36,27 @@ public class Repository implements IDataSource {
 //                    }
 //                });
 
-        remoteDataSource=new RemoteDataSource();
+        remoteDataSource = new RemoteDataSource();
     }
 
+    public static Repository getInstance(final AppDataBase database) {
+        if (sInstance == null) {
+            synchronized (Repository.class) {
+                if (sInstance == null) {
+                    sInstance = new Repository(database);
+                }
+            }
+        }
+        return sInstance;
+    }
+
+    @NonNull
     @Override
     public LiveData<ProfileEntity> getProfile(String userName) {
         return remoteDataSource.getProfile(userName);
     }
 
+    @NonNull
     @Override
     public LiveData<PagedList<TweetEntity>> getTweets(String userName) {
         return remoteDataSource.getTweets(userName);

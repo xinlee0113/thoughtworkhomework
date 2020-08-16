@@ -38,4 +38,9 @@ Json data specification
 4. PagedList:https://www.jianshu.com/p/ff5c711bb7a1
 
 
+20200816
+1. 调整布局
+2. 本地缓存
+3. lint
+4. 屏幕适配
 

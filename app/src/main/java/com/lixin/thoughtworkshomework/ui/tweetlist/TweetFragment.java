@@ -11,16 +11,14 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.paging.PagedList;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.bumptech.glide.request.RequestOptions;
 import com.lixin.thoughtworkshomework.R;
-import com.lixin.thoughtworkshomework.repo.entity.ProfileEntity;
-import com.lixin.thoughtworkshomework.repo.entity.TweetEntity;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 
 import butterknife.BindView;
@@ -32,37 +30,26 @@ import butterknife.Unbinder;
  * @date 2020/8/14.
  */
 public class TweetFragment extends Fragment {
-    public static String TAG = "TweetFragment";
-    private String userName = "jsmith";
-    private static TweetFragment sInstance;
-    private TweetViewModel tweetViewModel;
-
+    public static final String TAG = "TweetFragment";
+    private final String userName = "jsmith";
+    @Nullable
     @BindView(R.id.img_avatar)
     ImageView imgAvatar;
-
+    @Nullable
     @BindView(R.id.img_profile)
     ImageView imgProfile;
-
+    @Nullable
     @BindView(R.id.tv_nick)
     TextView tvNick;
-
     //智能刷新布局
+    @Nullable
     @BindView(R.id.srl_tweet_list)
     SmartRefreshLayout srlTweetList;
-
+    @Nullable
     @BindView(R.id.ry_tweet_list)
     RecyclerView ryTweetList;
-
+    private TweetViewModel tweetViewModel;
     private Unbinder butterKnifeBinder;
-
-    public static TweetFragment newInstance() {
-        if (sInstance == null) {
-            synchronized (TweetFragment.class) {
-                sInstance = new TweetFragment();
-            }
-        }
-        return sInstance;
-    }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -102,25 +89,23 @@ public class TweetFragment extends Fragment {
         ryTweetList.setAdapter(adapter);
         ryTweetList.setLayoutManager(new LinearLayoutManager(requireContext()));
 
-        tweetViewModel.getObservableTweetList("jsmith").observe(requireActivity(), new Observer<PagedList<TweetEntity>>() {
-            @Override
-            public void onChanged(PagedList<TweetEntity> pagedList) {
-                adapter.submitList(pagedList);
-            }
-        });
+        tweetViewModel.getObservableTweetList("jsmith").observe(requireActivity(), pagedList -> adapter.submitList(pagedList));
     }
 
     private void bindProfileDataToView() {
         Log.i(TAG, "listenToDataChanged");
-        tweetViewModel.getObservableProfile(userName).observe(getViewLifecycleOwner(), new Observer<ProfileEntity>() {
-            @Override
-            public void onChanged(ProfileEntity profileEntity) {
-                Log.i(TAG, "listenToDataChanged onChanged profileEntity=" + profileEntity);
-                Log.e(TAG, "profile img can not be used, =" + profileEntity.profileImg);
-                tvNick.setText(profileEntity.nick);
-                Glide.with(TweetFragment.this).load(profileEntity.profileImg).into(imgProfile);
-                Glide.with(TweetFragment.this).load(profileEntity.avatar).into(imgAvatar);
-            }
+        tweetViewModel.getObservableProfile(userName).observe(getViewLifecycleOwner(), profileEntity -> {
+            Log.i(TAG, "listenToDataChanged onChanged profileEntity=" + profileEntity);
+            Log.e(TAG, "profile img can not be used, =" + profileEntity.profileImg);
+            tvNick.setText(profileEntity.nick);
+            //设置图片圆角角度
+            RoundedCorners roundedCorners = new RoundedCorners(10);
+            //通过RequestOptions扩展功能,override:采样率,因为ImageView就这么大,可以压缩图片,降低内存消耗
+            // RequestOptions options = RequestOptions.bitmapTransform(roundedCorners).override(300, 300);
+            RequestOptions options = RequestOptions.bitmapTransform(roundedCorners);
+
+            Glide.with(TweetFragment.this).load(profileEntity.profileImg).error(R.drawable.icon_head_bg).into(imgProfile);
+            Glide.with(TweetFragment.this).load(profileEntity.avatar).apply(options).error(R.drawable.icon_head).into(imgAvatar);
         });
     }
 

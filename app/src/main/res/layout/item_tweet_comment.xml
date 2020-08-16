@@ -25,7 +25,8 @@
             android:id="@+id/tv_tweet_comment_sender_avatar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tv_tweet_comment_sender_user_name" />
+            android:layout_below="@id/tv_tweet_comment_sender_user_name"
+            android:contentDescription="TODO" />
 
         <TextView
             android:id="@+id/tv_tweet_comment_sender_nick"

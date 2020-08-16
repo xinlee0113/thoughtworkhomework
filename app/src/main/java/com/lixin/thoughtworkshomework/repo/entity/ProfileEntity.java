@@ -4,6 +4,8 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import org.jetbrains.annotations.NotNull;
+
 /**
  * @author lixin
  * @date 2020/8/14.
@@ -21,6 +23,7 @@ public class ProfileEntity {
     @ColumnInfo(name = "userName")
     public String userName;
 
+    @NotNull
     @Override
     public String toString() {
         return "ProfileEntity{" +

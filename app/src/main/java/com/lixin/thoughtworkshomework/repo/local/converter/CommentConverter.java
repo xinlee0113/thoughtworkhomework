@@ -1,5 +1,6 @@
 package com.lixin.thoughtworkshomework.repo.local.converter;
 
+import androidx.annotation.Nullable;
 import androidx.room.TypeConverter;
 
 import com.google.gson.Gson;
@@ -20,10 +21,12 @@ public class CommentConverter {
         return new Gson().toJson(list);
     }
 
+    @Nullable
     @TypeConverter
     public List<TweetEntity.Comment> convertStringToComment(String json) {
         try {
-            return new Gson().fromJson(json, new TypeToken<List<TweetEntity.Comment>>(){}.getType());
+            return new Gson().fromJson(json, new TypeToken<List<TweetEntity.Comment>>() {
+            }.getType());
         } catch (Exception e) {
             e.printStackTrace();
         }

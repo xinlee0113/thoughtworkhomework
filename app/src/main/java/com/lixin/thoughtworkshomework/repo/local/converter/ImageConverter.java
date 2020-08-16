@@ -1,5 +1,6 @@
 package com.lixin.thoughtworkshomework.repo.local.converter;
 
+import androidx.annotation.Nullable;
 import androidx.room.TypeConverter;
 
 import com.google.gson.Gson;
@@ -19,11 +20,13 @@ public class ImageConverter {
         return new Gson().toJson(list);
     }
 
+    @Nullable
     @TypeConverter
     public List<TweetEntity.Image> convertStringToImage(String json) {
         try {
 
-            return new Gson().fromJson(json,new TypeToken<List<TweetEntity.Image>>(){}.getType());
+            return new Gson().fromJson(json, new TypeToken<List<TweetEntity.Image>>() {
+            }.getType());
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -25,22 +25,14 @@ import java.util.List;
  * @author lixin
  * @date 2020/8/14.
  */
-@Database(entities = {ProfileEntity.class, TweetEntity.class}, version = 1 ,exportSchema = false)
+@Database(entities = {ProfileEntity.class, TweetEntity.class}, version = 1, exportSchema = false)
 @TypeConverters({CommentConverter.class, ImageConverter.class, SenderConverter.class})
 abstract public class AppDataBase extends RoomDatabase {
-    public abstract ProfileDao profileDao();
-
-    public abstract TweetDao tweetDao();
-
-    private static AppDataBase sInstance;
-
     public static final String DATABASE_NAME = "demo-tweet-db";
-
+    private static AppDataBase sInstance;
     private final MutableLiveData<Boolean> isDbCreated = new MutableLiveData<>();
 
-
-
-    public static AppDataBase getInstance(final Context context, final AppExecutors executors) {
+    public static AppDataBase getInstance(@NonNull final Context context, @NonNull final AppExecutors executors) {
         if (sInstance == null) {
             synchronized (AppDataBase.class) {
                 if (sInstance == null) {
@@ -52,27 +44,29 @@ abstract public class AppDataBase extends RoomDatabase {
         return sInstance;
     }
 
-    private static AppDataBase buildDatabase(final Context appContext, final AppExecutors executors) {
+    @NonNull
+    private static AppDataBase buildDatabase(@NonNull final Context appContext, @NonNull final AppExecutors executors) {
         return Room.databaseBuilder(appContext, AppDataBase.class, DATABASE_NAME)
                 .addCallback(new Callback() {
                     @Override
                     public void onCreate(@NonNull SupportSQLiteDatabase db) {
                         super.onCreate(db);
-                        executors.diskIO().execute(new Runnable() {
-                            @Override
-                            public void run() {
-                                // Generate the data for pre-population
-                                AppDataBase database = AppDataBase.getInstance(appContext, executors);
-                                List<ProfileEntity> profileEntities = new ArrayList<>();
-                                List<TweetEntity> tweetEntities = new ArrayList<>();
-                                //TODO insertTestData
-                                database.setDatabaseCreated();
-                            }
+                        executors.diskIO().execute(() -> {
+                            // Generate the data for pre-population
+                            AppDataBase database = AppDataBase.getInstance(appContext, executors);
+                            List<ProfileEntity> profileEntities = new ArrayList<>();
+                            List<TweetEntity> tweetEntities = new ArrayList<>();
+                            //TODO insertTestData
+                            database.setDatabaseCreated();
                         });
                     }
                 })
                 .build();
     }
+
+    public abstract ProfileDao profileDao();
+
+    public abstract TweetDao tweetDao();
 
     private void setDatabaseCreated() {
         isDbCreated.postValue(true);
@@ -81,12 +75,13 @@ abstract public class AppDataBase extends RoomDatabase {
     /**
      * Check whether the database already exists and expose it via {@link #getDatabaseCreated()}
      */
-    private void updateDatabaseCreated(final Context context) {
+    private void updateDatabaseCreated(@NonNull final Context context) {
         if (context.getDatabasePath(DATABASE_NAME).exists()) {
             setDatabaseCreated();
         }
     }
 
+    @NonNull
     public LiveData<Boolean> getDatabaseCreated() {
         return isDbCreated;
     }

@@ -1,51 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.scwang.smartrefresh.layout.SmartRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/srl_tweet_list"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:layout_below="@id/img_avatar"
+    android:layout_marginTop="@dimen/dp_40">
 
-
-    <ImageView
-        android:id="@+id/img_profile"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_alignParentTop="true"
-        android:background="@color/colorPrimary" />
+        android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/img_avatar"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_alignBottom="@id/img_profile"
-        android:layout_alignParentRight="true"
-        android:layout_marginBottom="-40dp"
-        android:background="@color/colorAccent"
 
-        />
+        <ImageView
+            android:id="@+id/img_profile"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_alignParentTop="true"
+            android:contentDescription="TODO"
+            android:scaleType="fitXY"
+            android:src="@drawable/icon_head_bg" />
 
-    <TextView
-        android:id="@+id/tv_nick"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@id/img_avatar"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="30dp"
-        android:layout_toLeftOf="@id/img_avatar"
-        android:background="@color/colorAccent"
-        android:gravity="center"
-        android:minWidth="60dp"
-        android:text="Xin" />
+        <ImageView
+            android:id="@+id/img_avatar"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_alignBottom="@id/img_profile"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="-40dp"
+            android:contentDescription="TODO"
+            android:src="@drawable/icon_head" />
 
-    <com.scwang.smartrefresh.layout.SmartRefreshLayout
-        android:id="@+id/srl_tweet_list"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/img_avatar"
-        android:layout_marginTop="@dimen/dp_40">
+        <TextView
+            android:id="@+id/tv_nick"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/img_avatar"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_toStartOf="@id/img_avatar"
+            android:layout_toLeftOf="@id/img_avatar"
+            android:gravity="center"
+            android:minWidth="60dp"
+            android:text="Xin"
+            android:textColor="@android:color/white"
+            android:textStyle="bold" />
+
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/ry_tweet_list"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
-
-</RelativeLayout>
+            android:layout_height="wrap_content"
+            android:layout_below="@id/img_profile"
+            android:layout_marginTop="40dp" />
+    </RelativeLayout>
+</com.scwang.smartrefresh.layout.SmartRefreshLayout>
