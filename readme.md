@@ -43,6 +43,5 @@ Json data specification
 2. 本地缓存
 3. lint   done
 4. 屏幕适配
-5. 图片压缩
-6. 单元测试
+5. 单元测试
 

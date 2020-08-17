@@ -161,4 +161,36 @@ public class RemoteDataSource implements IDataSource {
         return observableTweetList;
     }
 
+    public void getTweets(DataCallback<List<TweetEntity>> callback) {
+        TweetApiCreator.getInstance().create()
+                .getTweets("jsmith")
+                .subscribeOn(Schedulers.io())
+                .observeOn(Schedulers.io())
+                .subscribe(new io.reactivex.Observer<List<TweetEntity>>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+//                                        Log.i(TAG, "fetchTweetList onSubscribe");
+                    }
+
+                    @Override
+                    public void onNext(@NonNull List<TweetEntity> tweetEntities) {
+                        callback.onResult(tweetEntities);
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+//                                        Log.i(TAG, "fetchTweetList onError=" + e.toString());
+                    }
+
+                    @Override
+                    public void onComplete() {
+//                                        Log.i(TAG, "fetchTweetList onComplete");
+                    }
+                });
+    }
+
+    public interface DataCallback<T> {
+        void onResult(T t);
+    }
 }

@@ -1,12 +1,13 @@
 package com.lixin.thoughtworkshomework.repo.local.dao;
 
-import androidx.lifecycle.LiveData;
+import androidx.paging.DataSource;
 import androidx.room.Dao;
+import androidx.room.Insert;
 import androidx.room.Query;
 
 import com.lixin.thoughtworkshomework.repo.entity.TweetEntity;
 
-import java.util.List;
+import static androidx.room.OnConflictStrategy.REPLACE;
 
 /**
  * @author lixin
@@ -14,6 +15,9 @@ import java.util.List;
  */
 @Dao
 public interface TweetDao {
-    @Query("SELECT * FROM tweet WHERE userName = :userName")
-    LiveData<List<TweetEntity>> queryTweetsByUserName(String userName);
+    @Query("SELECT * FROM tweet")
+    DataSource.Factory<Integer, TweetEntity> queryTweetsByUserName();
+
+    @Insert(onConflict = REPLACE)
+    void save(TweetEntity tweet);
 }

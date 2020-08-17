@@ -51,4 +51,8 @@ public class TweetApp extends Application {
     public Repository getRepository() {
         return Repository.getInstance(getDatabase());
     }
+
+    public AppExecutors getAppExecutors() {
+        return mAppExecutors;
+    }
 }

@@ -16,7 +16,7 @@ import java.util.List;
 public class SenderConverter {
     @TypeConverter
     public String convertSenderToString(TweetEntity.Sender sender) {
-        return new Gson().toJson(sender, TweetEntity.Image.class);
+        return new Gson().toJson(sender, TweetEntity.Sender.class);
     }
 
     @TypeConverter
