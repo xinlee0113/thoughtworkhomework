@@ -12,6 +12,7 @@ import java.util.List;
 /**
  * @author lixin
  * @date 2020/8/14.
+ * 图片列表、Json 互转
  */
 
 public class ImageConverter {

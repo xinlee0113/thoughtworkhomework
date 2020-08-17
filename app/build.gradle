@@ -77,4 +77,13 @@ dependencies {
     //ui
     implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.2'
 
+    //屏幕适配
+    implementation 'me.jessyan:autosize:1.1.2'
+    api 'me.jessyan:autosize:1.1.2'
+    /*
+    在使用主单位时，design_width_in_dp 和 design_height_in_dp 的单位必须是 dp，
+    计算公式 dp = px / (DPI / 160) 将 px 尺寸转换为 dp 尺寸，
+    如果实在找不到设备的 DPI 那就直接将 px 尺寸除以 3 或者 2 。
+     */
+
 }

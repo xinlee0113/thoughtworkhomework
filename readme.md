@@ -42,7 +42,7 @@ Json data specification
 1. 调整布局  done
 2. 本地缓存
 3. lint   done
-4. 屏幕适配
+4. 屏幕适配  done 使用AndroidAutoSize 。成本低。
 5. 图片压缩
 6. 单元测试
 

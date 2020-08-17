@@ -7,13 +7,13 @@
 
     <ImageView
         android:id="@+id/tv_tweet_sender_avatar"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="@dimen/dimen_width_tweet_sender_avatar"
+        android:layout_height="@dimen/dimen_width_tweet_sender_avatar"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginLeft="@dimen/margin_left_tweet_sender_avatar"
+        android:layout_marginTop="@dimen/margin_end_tweet_sender_avatar"
         android:src="@drawable/icon_head" />
 
     <TextView
@@ -21,11 +21,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/tv_tweet_sender_avatar"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginLeft="@dimen/margin_left_tweet_sender_nick"
+        android:layout_marginTop="@dimen/margin_top_tweet_sender_nick"
         android:layout_toRightOf="@id/tv_tweet_sender_avatar"
-        android:text="小楚"
-        android:textColor="#E13F51B5"
+        android:textColor="@color/color_tweet_sender_nick"
         android:textStyle="bold" />
 
     <TextView
@@ -33,17 +32,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/tv_tweet_sender_nick"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_toRightOf="@id/tv_tweet_sender_avatar"
-        android:text="从前那个少年，哈哈哈哈哈哈哈哈哈" />
+        android:layout_marginLeft="@dimen/margin_left_tweet_content"
+        android:layout_marginTop="@dimen/margin_top_tweet_content"
+        android:layout_toRightOf="@id/tv_tweet_sender_avatar" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/ry_twee_images"
+        android:id="@+id/ry_tweet_images"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/tv_tweet_content"
-        android:layout_marginLeft="10dp"
+        android:layout_marginLeft="@dimen/margin_left_tweet_images"
         android:layout_toRightOf="@id/tv_tweet_sender_avatar"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:spanCount="3" />
@@ -52,8 +50,8 @@
         android:id="@+id/ry_tweet_comments"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/ry_twee_images"
-        android:layout_marginLeft="10dp"
+        android:layout_below="@id/ry_tweet_images"
+        android:layout_marginLeft="@dimen/margin_left_tweet_comments"
         android:layout_toRightOf="@id/tv_tweet_sender_avatar" />
 
     <!--    <TextView-->

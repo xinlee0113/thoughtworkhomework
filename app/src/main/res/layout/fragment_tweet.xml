@@ -3,30 +3,31 @@
     android:id="@+id/srl_tweet_list"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_below="@id/img_avatar"
-    >
+    android:layout_below="@id/img_avatar">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <ImageView
             android:id="@+id/img_profile"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="@dimen/dimen_profile_img_height"
             android:layout_alignParentTop="true"
             android:contentDescription="TODO"
             android:scaleType="fitXY"
             android:src="@drawable/icon_head_bg" />
+
         <ImageView
             android:id="@+id/img_avatar"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="@dimen/dimen_avatar_height"
+            android:layout_height="@dimen/dimen_avatar_height"
             android:layout_alignBottom="@id/img_profile"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:layout_marginEnd="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginBottom="-40dp"
+            android:layout_marginEnd="@dimen/margin_end_avatar"
+            android:layout_marginRight="@dimen/margin_end_avatar"
+            android:layout_marginBottom="@dimen/margin_bottom_avatar"
             android:contentDescription="TODO"
             android:src="@drawable/icon_head" />
 
@@ -35,14 +36,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignTop="@id/img_avatar"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="30dp"
+            android:layout_marginTop="@dimen/margin_top_nick"
+            android:layout_marginEnd="@dimen/margin_end_nick"
             android:layout_marginRight="30dp"
             android:layout_toStartOf="@id/img_avatar"
             android:layout_toLeftOf="@id/img_avatar"
             android:gravity="center"
-            android:minWidth="60dp"
-            android:text="Xin"
+            android:minWidth="@dimen/dimen_width_min_nick"
             android:textColor="@android:color/white"
             android:textStyle="bold" />
 
@@ -51,6 +51,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/img_profile"
-            android:layout_marginTop="40dp" />
+            android:layout_marginTop="@dimen/margin_top_tweet_list" />
     </RelativeLayout>
 </com.scwang.smartrefresh.layout.SmartRefreshLayout>

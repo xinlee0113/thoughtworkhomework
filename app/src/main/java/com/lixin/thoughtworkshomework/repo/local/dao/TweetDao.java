@@ -7,11 +7,14 @@ import androidx.room.Query;
 
 import com.lixin.thoughtworkshomework.repo.entity.TweetEntity;
 
+import java.util.List;
+
 import static androidx.room.OnConflictStrategy.REPLACE;
 
 /**
  * @author lixin
  * @date 2020/8/13.
+ * 朋友圈信息Dao
  */
 @Dao
 public interface TweetDao {
@@ -20,4 +23,7 @@ public interface TweetDao {
 
     @Insert(onConflict = REPLACE)
     void save(TweetEntity tweet);
+
+    @Insert(onConflict = REPLACE)
+    void saveAll(List<TweetEntity> tweets);
 }

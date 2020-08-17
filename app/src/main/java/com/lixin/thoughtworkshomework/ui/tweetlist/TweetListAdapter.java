@@ -19,7 +19,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -34,6 +33,7 @@ import java.util.Objects;
 /**
  * @author lixin
  * @date 2020/8/14.
+ * 朋友圈列表适配器，支持分页加载，使用JetPack的PagingList组件
  */
 public class TweetListAdapter extends PagedListAdapter<TweetEntity, TweetListAdapter.TweetViewHolder> {
 
@@ -91,7 +91,7 @@ public class TweetListAdapter extends PagedListAdapter<TweetEntity, TweetListAda
         public TweetViewHolder(@NonNull View itemView) {
             super(itemView);
             tvContent = (TextView) itemView.findViewById(R.id.tv_tweet_content);
-            ryImages = (RecyclerView) itemView.findViewById(R.id.ry_twee_images);
+            ryImages = (RecyclerView) itemView.findViewById(R.id.ry_tweet_images);
             ryComments = (RecyclerView) itemView.findViewById(R.id.ry_tweet_comments);
             tvTweetSenderNick = (TextView) itemView.findViewById(R.id.tv_tweet_sender_nick);
             imgTweetSenderAvatar = (ImageView) itemView.findViewById(R.id.tv_tweet_sender_avatar);

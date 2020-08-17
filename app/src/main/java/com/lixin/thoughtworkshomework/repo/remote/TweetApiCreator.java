@@ -16,10 +16,14 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+/**
+ * @author lixin
+ * 远程数据的RestApi 构建器
+ */
 public class TweetApiCreator {
     private volatile static TweetApiCreator instance;
     @NonNull
-    private final Retrofit retrofit;
+    private final Retrofit mRetrofit;
 
     private TweetApiCreator() {
         Interceptor interceptor = chain -> {
@@ -50,7 +54,7 @@ public class TweetApiCreator {
                 .addNetworkInterceptor(httpLoggingInterceptor)
                 .build();
 
-        retrofit = new Retrofit.Builder()
+        mRetrofit = new Retrofit.Builder()
                 .baseUrl(TweetsApi.BASE_URL)
                 .client(okHttpClient)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
@@ -85,6 +89,6 @@ public class TweetApiCreator {
 
     @NonNull
     public <T> T create(@NonNull final Class<T> service) {
-        return retrofit.create(service);
+        return mRetrofit.create(service);
     }
 }

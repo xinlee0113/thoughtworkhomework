@@ -15,6 +15,7 @@ import java.util.List;
 /**
  * @author lixin
  * @date 2020/8/14.
+ * 朋友圈信息实体类
  */
 @Entity(tableName = "tweet")
 public class TweetEntity {

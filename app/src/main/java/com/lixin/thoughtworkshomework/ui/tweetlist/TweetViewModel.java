@@ -12,28 +12,29 @@ import com.lixin.thoughtworkshomework.repo.entity.TweetEntity;
 /**
  * @author lixin
  * @date 2020/8/14.
+ * 朋友圈ViewModel
  */
 public class TweetViewModel extends ViewModel {
     private static final String TAG = "TweetViewModel";
-    final Repository repository;
-    LiveData<ProfileEntity> observableProfile;
+    final Repository mRepository;
+    LiveData<ProfileEntity> mObservableProfile;
     LiveData<PagedList<TweetEntity>> observableTweetList;
 
     public TweetViewModel() {
         super();
-        repository = TweetApp.getInstance().getRepository();
+        mRepository = TweetApp.getInstance().getRepository();
     }
 
     public LiveData<ProfileEntity> getObservableProfile(String userName) {
-        if (observableProfile == null) {
-            observableProfile = repository.getProfile(userName);
+        if (mObservableProfile == null) {
+            mObservableProfile = mRepository.getProfile(userName);
         }
-        return observableProfile;
+        return mObservableProfile;
     }
 
     public LiveData<PagedList<TweetEntity>> getObservableTweetList(String userName) {
         if (null == observableTweetList) {
-            observableTweetList = repository.getTweets(userName);
+            observableTweetList = mRepository.getTweets(userName);
         }
         return observableTweetList;
     }

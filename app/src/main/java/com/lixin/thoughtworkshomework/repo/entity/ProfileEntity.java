@@ -9,6 +9,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * @author lixin
  * @date 2020/8/14.
+ * 用户信息实体类
  */
 @Entity(tableName = "profile")
 public class ProfileEntity {

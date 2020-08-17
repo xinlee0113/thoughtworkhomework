@@ -14,6 +14,7 @@ import retrofit2.http.Path;
 /**
  * @author lixin
  * @date 2020/8/13.
+ * 朋友圈RestApi
  * http://thoughtworks-ios.herokuapp.com/user/jsmith
  * http://thoughtworks-ios.herokuapp.com/user/jsmith/tweets
  */

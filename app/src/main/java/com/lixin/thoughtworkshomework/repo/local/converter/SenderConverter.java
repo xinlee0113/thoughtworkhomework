@@ -12,6 +12,7 @@ import java.util.List;
 /**
  * @author lixin
  * @date 2020/8/14.
+ * 发送者对象、Json互转
  */
 public class SenderConverter {
     @TypeConverter

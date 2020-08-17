@@ -17,17 +17,18 @@ import java.util.List;
 /**
  * @author lixin
  * @date 2020/8/14.
+ * 数据仓，为ui层提供数据， 包装了数据接口、数据加载策略。
  */
 public class Repository implements IDataSource {
     private static Repository sInstance;
-    private final AppDataBase localDataSource;
+    private final AppDataBase mLocalDataSource;
     @NonNull
-    private final RemoteDataSource remoteDataSource;
-    private LiveData<PagedList<TweetEntity>> pagedTweetList;
+    private final RemoteDataSource mRemoteDataSource;
+    private LiveData<PagedList<TweetEntity>> mPagedTweetList;
 
     private Repository(final AppDataBase database) {
-        this.localDataSource = database;
-        pagedTweetList = new MediatorLiveData<>();
+        this.mLocalDataSource = database;
+        mPagedTweetList = new MediatorLiveData<>();
         DataSource.Factory<Integer, TweetEntity> factory = database.tweetDao().queryTweetsByUserName();
         PagedList.Config config = new PagedList.Config.Builder()
                 .setPageSize(5)              // 分页加载的数量
@@ -35,9 +36,9 @@ public class Repository implements IDataSource {
                 .setPrefetchDistance(5)      // 预取数据的距离
                 .setEnablePlaceholders(false) // 是否启用占位符（本地数据比较合适，因为远程数据是未知的）
                 .build();
-        pagedTweetList = new LivePagedListBuilder<>(factory, config).build();
+        mPagedTweetList = new LivePagedListBuilder<>(factory, config).build();
 
-        remoteDataSource = new RemoteDataSource();
+        mRemoteDataSource = new RemoteDataSource();
     }
 
     public static Repository getInstance(final AppDataBase database) {
@@ -54,24 +55,24 @@ public class Repository implements IDataSource {
     @NonNull
     @Override
     public LiveData<ProfileEntity> getProfile(String userName) {
-        return remoteDataSource.getProfile(userName);
+        return mRemoteDataSource.getProfile(userName);
     }
 
     @NonNull
     @Override
     public LiveData<PagedList<TweetEntity>> getTweets(String userName) {
         freshTweets(userName);
-        return pagedTweetList;
+        return mPagedTweetList;
     }
 
     private void freshTweets(String userName) {
         //sync data from cloud (all data, but not the paged), and the save into db,
         // the repository can listened the data changed,ui refreshed;
-        remoteDataSource.getTweets(new RemoteDataSource.DataCallback<List<TweetEntity>>() {
+        mRemoteDataSource.getTweets(new RemoteDataSource.DataCallback<List<TweetEntity>>() {
             @Override
             public void onResult(List<TweetEntity> tweetEntities) {
                 for (TweetEntity tweet : tweetEntities) {
-                    localDataSource.tweetDao().save(tweet);
+                    mLocalDataSource.tweetDao().save(tweet);
                 }
             }
         });

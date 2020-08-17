@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="dimen_profile_img_height">200dp</dimen>
+    <dimen name="dimen_avatar_height">80dp</dimen>
+    <dimen name="dimen_width_tweet_img">100dp</dimen>
+    <dimen name="dimen_width_tweet_sender_avatar">50dp</dimen>
+    <dimen name="dimen_width_min_nick">60dp</dimen>
+
+    <dimen name="margin_end_avatar">20dp</dimen>
+    <dimen name="margin_bottom_avatar">-40dp</dimen>
+    <dimen name="margin_top_nick">10dp</dimen>
+    <dimen name="margin_end_nick">30dp</dimen>
+    <dimen name="margin_top_tweet_list">40dp</dimen>
+    <dimen name="margin_left_tweet_sender_avatar">10dp</dimen>
+    <dimen name="margin_end_tweet_sender_avatar">8dp</dimen>
+    <dimen name="margin_left_tweet_sender_nick">10dp</dimen>
+    <dimen name="margin_top_tweet_sender_nick">5dp</dimen>
+    <dimen name="margin_left_tweet_content">10dp</dimen>
+    <dimen name="margin_top_tweet_content">10dp</dimen>
+    <dimen name="margin_left_tweet_images">10dp</dimen>
+    <dimen name="margin_left_tweet_comments">10dp</dimen>
+</resources>

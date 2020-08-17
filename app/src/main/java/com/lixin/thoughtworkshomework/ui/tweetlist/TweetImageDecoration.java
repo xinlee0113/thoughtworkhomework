@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 /**
  * @author lixin
  * @date 2020/8/17.
+ * 朋友圈图片间隔帮助类
  */
 class TweetImageDecoration extends RecyclerView.ItemDecoration {
     /**

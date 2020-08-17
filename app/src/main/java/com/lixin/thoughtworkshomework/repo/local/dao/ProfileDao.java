@@ -14,6 +14,7 @@ import java.util.List;
 /**
  * @author lixin
  * @date 2020/8/13.
+ * 用户信息Dao
  */
 @Dao
 public interface ProfileDao {

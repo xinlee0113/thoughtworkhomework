@@ -24,6 +24,7 @@ import java.util.List;
 /**
  * @author lixin
  * @date 2020/8/14.
+ * 数据库
  */
 @Database(entities = {ProfileEntity.class, TweetEntity.class}, version = 1, exportSchema = false)
 @TypeConverters({CommentConverter.class, ImageConverter.class, SenderConverter.class})
