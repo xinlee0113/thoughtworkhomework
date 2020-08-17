@@ -6,6 +6,8 @@ import androidx.room.PrimaryKey;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Objects;
+
 /**
  * @author lixin
  * @date 2020/8/14.
@@ -34,5 +36,22 @@ public class ProfileEntity {
                 ", nick='" + nick + '\'' +
                 ", userName='" + userName + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ProfileEntity that = (ProfileEntity) o;
+        return
+                Objects.equals(profileImg, that.profileImg) &&
+                Objects.equals(avatar, that.avatar) &&
+                Objects.equals(nick, that.nick) &&
+                Objects.equals(userName, that.userName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash( profileImg, avatar, nick, userName);
     }
 }

@@ -67,7 +67,7 @@ public class TweetListAdapter extends PagedListAdapter<TweetEntity, TweetListAda
     @Override
     public void onBindViewHolder(@NonNull TweetViewHolder holder, int position) {
         TweetEntity entity = getItem(position);
-        if (entity != null) {
+        if (entity != null && entity.error == null && entity.unknown_error == null) {
             holder.bindTo(Objects.requireNonNull(getItem(position)));
         } else {
             holder.clear();
@@ -164,6 +164,8 @@ public class TweetListAdapter extends PagedListAdapter<TweetEntity, TweetListAda
 
         public void clear() {
             //TODO
+            tweetCommentAdapter = null;
+            tweetImgAdapter = null;
         }
     }
 

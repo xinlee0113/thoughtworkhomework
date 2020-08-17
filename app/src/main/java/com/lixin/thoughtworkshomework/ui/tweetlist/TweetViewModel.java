@@ -32,9 +32,9 @@ public class TweetViewModel extends ViewModel {
         return mObservableProfile;
     }
 
-    public LiveData<PagedList<TweetEntity>> getObservableTweetList(String userName) {
+    public LiveData<PagedList<TweetEntity>> getObservableTweetList(String userName,boolean reqFetch) {
         if (null == observableTweetList) {
-            observableTweetList = mRepository.getTweets(userName);
+            observableTweetList = mRepository.getTweets(userName,reqFetch);
         }
         return observableTweetList;
     }

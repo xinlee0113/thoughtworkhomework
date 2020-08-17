@@ -82,14 +82,12 @@ public class TweetFragment extends Fragment {
         //2. TweetListViewModel
         //2.1 config\ factory\ datasource
         //3. 数据加载策略
-        //分段加载数据，首先从本地加载数据、加载完后。
-        // 从网络加载，刷新本地数据，刷新ui， 对于ViewModel， 唯一数据来源仍是数据库
-        // 主动请求网络数据后，需要主动刷新本地数据。
+
         TweetListAdapter adapter = new TweetListAdapter();
         mRyTweetList.setAdapter(adapter);
         mRyTweetList.setLayoutManager(new LinearLayoutManager(requireContext()));
         mRyTweetList.setNestedScrollingEnabled(true);
-        mTweetViewModel.getObservableTweetList("jsmith").observe(requireActivity(), pagedList -> {
+        mTweetViewModel.getObservableTweetList("jsmith", false).observe(requireActivity(), pagedList -> {
             adapter.submitList(pagedList);
         });
     }
@@ -102,7 +100,7 @@ public class TweetFragment extends Fragment {
             mTvNick.setText(profileEntity.nick);
             //设置图片圆角角度
             RoundedCorners roundedCorners = new RoundedCorners(10);
-            RequestOptions options = RequestOptions.bitmapTransform(roundedCorners).override(300, 300);
+            RequestOptions options = RequestOptions.bitmapTransform(roundedCorners).override(300, 100);
 
             Glide.with(TweetFragment.this).load(profileEntity.profileImg).error(R.drawable.icon_head_bg).into(mImgProfile);
             Glide.with(TweetFragment.this).load(profileEntity.avatar).apply(options).error(R.drawable.icon_head).into(mImgAvatar);

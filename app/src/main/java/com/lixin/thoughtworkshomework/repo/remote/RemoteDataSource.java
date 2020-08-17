@@ -80,7 +80,8 @@ public class RemoteDataSource implements IDataSource {
 
     @NonNull
     @Override
-    public LiveData<PagedList<TweetEntity>> getTweets(String userName) {
+    public LiveData<PagedList<TweetEntity>> getTweets(String userName, boolean fetch) {
+        //not used
         return mObservableTweetList;
     }
 
@@ -104,6 +105,7 @@ public class RemoteDataSource implements IDataSource {
                     @Override
                     public void onError(Throwable e) {
 //                                        Log.i(TAG, "fetchTweetList onError=" + e.toString());
+                        callback.onError(e);
                     }
 
                     @Override
@@ -119,5 +121,7 @@ public class RemoteDataSource implements IDataSource {
          *               用于通过回调返回结果
          */
         void onResult(T result);
+
+        void onError(Throwable e);
     }
 }

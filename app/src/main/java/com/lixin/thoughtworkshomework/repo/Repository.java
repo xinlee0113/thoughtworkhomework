@@ -13,6 +13,7 @@ import com.lixin.thoughtworkshomework.repo.local.dao.AppDataBase;
 import com.lixin.thoughtworkshomework.repo.remote.RemoteDataSource;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author lixin
@@ -25,9 +26,14 @@ public class Repository implements IDataSource {
     @NonNull
     private final RemoteDataSource mRemoteDataSource;
     private LiveData<PagedList<TweetEntity>> mPagedTweetList;
+    /**
+     * 十分钟之后判定为需要刷新
+     */
+    private RateLimiter<String> rateLimiter;
 
     private Repository(final AppDataBase database) {
         this.mLocalDataSource = database;
+        rateLimiter = new RateLimiter<>(10, TimeUnit.MINUTES);
         mPagedTweetList = new MediatorLiveData<>();
         DataSource.Factory<Integer, TweetEntity> factory = database.tweetDao().queryTweetsByUserName();
         PagedList.Config config = new PagedList.Config.Builder()
@@ -60,23 +66,35 @@ public class Repository implements IDataSource {
 
     @NonNull
     @Override
-    public LiveData<PagedList<TweetEntity>> getTweets(String userName) {
-        freshTweets(userName);
+    public LiveData<PagedList<TweetEntity>> getTweets(String userName, boolean needFetch) {
+        freshTweetsIfNeed(userName, needFetch);
         return mPagedTweetList;
     }
 
-    private void freshTweets(String userName) {
+    private void freshTweetsIfNeed(String userName, boolean reqFetch) {
         //sync data from cloud (all data, but not the paged), and the save into db,
         // the repository can listened the data changed,ui refreshed;
-        mRemoteDataSource.getTweets(new RemoteDataSource.DataCallback<List<TweetEntity>>() {
-            @Override
-            public void onResult(List<TweetEntity> tweetEntities) {
-                for (TweetEntity tweet : tweetEntities) {
-                    mLocalDataSource.tweetDao().save(tweet);
+        //主动同步数据或者数据过期时，需要同步数据。
+        if (reqFetch || shouldFetch(userName)) {
+            mRemoteDataSource.getTweets(new RemoteDataSource.DataCallback<List<TweetEntity>>() {
+                @Override
+                public void onResult(List<TweetEntity> tweetEntities) {
+                    for (TweetEntity tweet : tweetEntities) {
+                        mLocalDataSource.tweetDao().save(tweet);
+                    }
                 }
-            }
-        });
+
+                @Override
+                public void onError(Throwable e) {
+                    rateLimiter.reset(userName);
+                }
+            });
+        }
 
 
+    }
+
+    private boolean shouldFetch(String userName) {
+        return rateLimiter.shouldFetch(userName);
     }
 }

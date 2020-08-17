@@ -40,9 +40,10 @@ Json data specification
 
 20200816
 1. 调整布局  done
-2. 本地缓存
+2. 本地缓存  done
 3. lint   done
 4. 屏幕适配  done 使用AndroidAutoSize 。成本低。
-5. 图片压缩
+5. 图片压缩  done
 6. 单元测试
+7. 架构图、依赖框架
 

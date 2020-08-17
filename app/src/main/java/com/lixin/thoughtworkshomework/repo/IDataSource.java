@@ -28,5 +28,5 @@ public interface IDataSource {
      * 获取朋友圈列表
      */
     @NonNull
-    LiveData<PagedList<TweetEntity>> getTweets(String userName);
+    LiveData<PagedList<TweetEntity>> getTweets(String userName,boolean fetch);
 }

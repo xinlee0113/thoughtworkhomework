@@ -11,6 +11,7 @@ import com.lixin.thoughtworkshomework.repo.local.converter.ImageConverter;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
  * @author lixin
@@ -74,5 +75,25 @@ public class TweetEntity {
                     ", avatar='" + avatar + '\'' +
                     '}';
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof TweetEntity)) return false;
+        TweetEntity entity = (TweetEntity) o;
+        return
+                Objects.equals(userName, entity.userName) &&
+                Objects.equals(content, entity.content) &&
+                Objects.equals(images, entity.images) &&
+                Objects.equals(sender, entity.sender) &&
+                Objects.equals(comments, entity.comments) &&
+                Objects.equals(error, entity.error) &&
+                Objects.equals(unknown_error, entity.unknown_error);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash( userName, content, images, sender, comments, error, unknown_error);
     }
 }
