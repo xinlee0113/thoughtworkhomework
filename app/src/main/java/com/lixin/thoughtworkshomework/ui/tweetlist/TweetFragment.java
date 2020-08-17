@@ -89,7 +89,9 @@ public class TweetFragment extends Fragment {
         ryTweetList.setAdapter(adapter);
         ryTweetList.setLayoutManager(new LinearLayoutManager(requireContext()));
         ryTweetList.setNestedScrollingEnabled(true);
-        tweetViewModel.getObservableTweetList("jsmith").observe(requireActivity(), pagedList -> adapter.submitList(pagedList));
+        tweetViewModel.getObservableTweetList("jsmith").observe(requireActivity(), pagedList -> {
+            adapter.submitList(pagedList);
+        });
     }
 
     private void bindProfileDataToView() {
