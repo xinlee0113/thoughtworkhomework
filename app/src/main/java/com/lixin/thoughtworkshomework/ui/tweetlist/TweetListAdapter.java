@@ -1,5 +1,10 @@
 package com.lixin.thoughtworkshomework.ui.tweetlist;
 
+import android.graphics.Typeface;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.StyleSpan;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -14,6 +19,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.bumptech.glide.request.RequestOptions;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.lixin.thoughtworkshomework.R;
@@ -68,11 +76,9 @@ public class TweetListAdapter extends PagedListAdapter<TweetEntity, TweetListAda
 
 
     public static class TweetViewHolder extends RecyclerView.ViewHolder {
+        private static final String TAG = "TweetViewHolder";
         TextView tvContent;
-        TextView tvId;
-        TextView tvUserName;
-        TextView tvError;
-        TextView tvTweetSenderName;
+        //        TextView tvTweetSenderName;
         TextView tvTweetSenderNick;
         ImageView imgTweetSenderAvatar;
         RecyclerView ryComments;
@@ -85,31 +91,30 @@ public class TweetListAdapter extends PagedListAdapter<TweetEntity, TweetListAda
         public TweetViewHolder(@NonNull View itemView) {
             super(itemView);
             tvContent = (TextView) itemView.findViewById(R.id.tv_tweet_content);
-//            tvId = itemView.findViewById(R.id.tv_id);
-//            tvUserName = itemView.findViewById(R.id.tv_user_name);
-//            tvError = itemView.findViewById(R.id.tv_error);
-//            ryImages = itemView.findViewById(R.id.ry_twee_images);
-//            ryComments = itemView.findViewById(R.id.ry_tweet_comments);
-//
-//            tvTweetSenderName = itemView.findViewById(R.id.tv_tweet_sender_user_name);
-//            tvTweetSenderNick = itemView.findViewById(R.id.tv_tweet_sender_nick);
-//            imgTweetSenderAvatar = itemView.findViewById(R.id.tv_tweet_sender_avatar);
+            ryImages = (RecyclerView) itemView.findViewById(R.id.ry_twee_images);
+            ryComments = (RecyclerView) itemView.findViewById(R.id.ry_tweet_comments);
+            tvTweetSenderNick = (TextView) itemView.findViewById(R.id.tv_tweet_sender_nick);
+            imgTweetSenderAvatar = (ImageView) itemView.findViewById(R.id.tv_tweet_sender_avatar);
         }
 
         public void bindTo(@NonNull TweetEntity item) {
             //TODO
             tvContent.setText(item.content);
-//            tvId.setText(item.id+"");
-//            tvUserName.setText(item.userName);
-//            tvError.setText(item.error != null ? item.error : item.unknown_error);
-//
-//            tvTweetSenderName.setText(item.sender.username);
-//            tvTweetSenderNick.setText(item.sender.nick);
-//            Glide.with(imgTweetSenderAvatar).load(item.sender.avatar).into(imgTweetSenderAvatar);
-//
-//            bindTweetImage(item);
-//
-//            bindTweetComment(item);
+            tvTweetSenderNick.setText(item.sender != null ? item.sender.nick : "");
+            //设置图片圆角角度
+            RoundedCorners roundedCorners = new RoundedCorners(5);
+            RequestOptions options = RequestOptions.bitmapTransform(roundedCorners).override(50, 50);
+
+            Glide.with(imgTweetSenderAvatar)
+                    .load(item.sender != null ? item.sender.avatar : null)
+                    .error(R.drawable.icon_head)
+                    .placeholder(R.drawable.icon_head)
+                    .apply(options)
+                    .into(imgTweetSenderAvatar);
+
+            bindTweetImage(item);
+
+            bindTweetComment(item);
 
         }
 
@@ -119,11 +124,13 @@ public class TweetListAdapter extends PagedListAdapter<TweetEntity, TweetListAda
                 tweetCommentAdapter = new BaseQuickAdapter<TweetEntity.Comment, BaseViewHolder>(R.layout.item_tweet_comment, item.comments) {
                     @Override
                     protected void convert(@NotNull BaseViewHolder baseViewHolder, @NonNull TweetEntity.Comment comment) {
-                        baseViewHolder.setText(R.id.tv_tweet_comment_content, comment.content);
-                        baseViewHolder.setText(R.id.tv_tweet_comment_sender_user_name, comment.sender.username);
-                        baseViewHolder.setText(R.id.tv_tweet_comment_sender_nick, comment.sender.nick);
-                        ImageView sendAvatarImgView = baseViewHolder.findView(R.id.tv_tweet_comment_sender_avatar);
-                        Glide.with(Objects.requireNonNull(sendAvatarImgView)).load(comment.sender.avatar).into(sendAvatarImgView);
+                        if (comment.sender != null) {
+                            SpannableString content = new SpannableString(comment.sender.nick + " : " + comment.content);
+                            content.setSpan(new StyleSpan(Typeface.BOLD), 0, comment.sender.nick.length() - 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                            Log.i(TAG, "comment=" + content);
+                            baseViewHolder.setText(R.id.tv_tweet_comment_content, content);
+                        }
+
                     }
                 };
                 ryComments.setAdapter(tweetCommentAdapter);
@@ -134,12 +141,19 @@ public class TweetListAdapter extends PagedListAdapter<TweetEntity, TweetListAda
 
         private void bindTweetImage(@NonNull TweetEntity item) {
             ryImages.setLayoutManager(new GridLayoutManager(itemView.getContext(), 3));
+            ryImages.addItemDecoration(new TweetImageDecoration(3, 10, false));
             if (tweetImgAdapter == null) {
                 tweetImgAdapter = new BaseQuickAdapter<TweetEntity.Image, BaseViewHolder>(R.layout.item_tweet_img, item.images) {
                     @Override
                     protected void convert(@NotNull BaseViewHolder baseViewHolder, @NonNull TweetEntity.Image img) {
                         ImageView imgItemView = baseViewHolder.findView(R.id.img_tweet);
-                        Glide.with(Objects.requireNonNull(imgItemView)).load(img.url).error(R.drawable.img_t).into(imgItemView);
+                        RoundedCorners roundedCorners = new RoundedCorners(5);
+                        RequestOptions options = RequestOptions.bitmapTransform(roundedCorners).override(100, 100);
+                        Glide.with(Objects.requireNonNull(imgItemView))
+                                .load(img.url)
+                                .apply(options)
+                                .error(R.drawable.img1)
+                                .into(imgItemView);
                     }
                 };
                 ryImages.setAdapter(tweetImgAdapter);

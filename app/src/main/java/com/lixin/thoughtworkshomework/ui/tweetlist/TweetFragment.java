@@ -88,7 +88,7 @@ public class TweetFragment extends Fragment {
         TweetListAdapter adapter = new TweetListAdapter();
         ryTweetList.setAdapter(adapter);
         ryTweetList.setLayoutManager(new LinearLayoutManager(requireContext()));
-
+        ryTweetList.setNestedScrollingEnabled(true);
         tweetViewModel.getObservableTweetList("jsmith").observe(requireActivity(), pagedList -> adapter.submitList(pagedList));
     }
 
@@ -100,9 +100,7 @@ public class TweetFragment extends Fragment {
             tvNick.setText(profileEntity.nick);
             //设置图片圆角角度
             RoundedCorners roundedCorners = new RoundedCorners(10);
-            //通过RequestOptions扩展功能,override:采样率,因为ImageView就这么大,可以压缩图片,降低内存消耗
-            // RequestOptions options = RequestOptions.bitmapTransform(roundedCorners).override(300, 300);
-            RequestOptions options = RequestOptions.bitmapTransform(roundedCorners);
+            RequestOptions options = RequestOptions.bitmapTransform(roundedCorners).override(300, 300);
 
             Glide.with(TweetFragment.this).load(profileEntity.profileImg).error(R.drawable.icon_head_bg).into(imgProfile);
             Glide.with(TweetFragment.this).load(profileEntity.avatar).apply(options).error(R.drawable.icon_head).into(imgAvatar);

@@ -4,13 +4,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_below="@id/img_avatar"
-    android:layout_marginTop="@dimen/dp_40">
+    >
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
-
         <ImageView
             android:id="@+id/img_profile"
             android:layout_width="match_parent"
@@ -19,7 +17,6 @@
             android:contentDescription="TODO"
             android:scaleType="fitXY"
             android:src="@drawable/icon_head_bg" />
-
         <ImageView
             android:id="@+id/img_avatar"
             android:layout_width="80dp"
@@ -48,7 +45,6 @@
             android:text="Xin"
             android:textColor="@android:color/white"
             android:textStyle="bold" />
-
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/ry_tweet_list"

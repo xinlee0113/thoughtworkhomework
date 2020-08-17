@@ -1,12 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
+
+
+    <ImageView
+        android:id="@+id/tv_tweet_sender_avatar"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/icon_head" />
+
+    <TextView
+        android:id="@+id/tv_tweet_sender_nick"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/tv_tweet_sender_avatar"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_toRightOf="@id/tv_tweet_sender_avatar"
+        android:text="小楚"
+        android:textColor="#E13F51B5"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/tv_tweet_content"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_tweet_sender_nick"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_toRightOf="@id/tv_tweet_sender_avatar"
+        android:text="从前那个少年，哈哈哈哈哈哈哈哈哈" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/ry_twee_images"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_tweet_content"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@id/tv_tweet_sender_avatar"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:spanCount="3" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/ry_tweet_comments"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ry_twee_images"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@id/tv_tweet_sender_avatar" />
 
     <!--    <TextView-->
     <!--        android:id="@+id/tv_id"-->
@@ -26,41 +74,11 @@
     <!--        android:layout_height="wrap_content"-->
     <!--        android:layout_below="@id/tv_user_name" />-->
 
-    <!--    <RelativeLayout-->
 
-    <!--        android:id="@+id/rl_tweet_sender"-->
+    <!--    <TextView-->
+    <!--        android:id="@+id/tv_tweet_sender_user_name"-->
     <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_below="@id/tv_error">-->
+    <!--        android:layout_height="wrap_content" />-->
 
-    <!--        <TextView-->
-    <!--            android:id="@+id/tv_tweet_sender_user_name"-->
-    <!--            android:layout_width="wrap_content"-->
-    <!--            android:layout_height="wrap_content" />-->
-
-    <!--        <TextView-->
-    <!--            android:id="@+id/tv_tweet_sender_nick"-->
-    <!--            android:layout_width="wrap_content"-->
-    <!--            android:layout_height="wrap_content"-->
-    <!--            android:layout_below="@id/tv_tweet_sender_user_name" />-->
-
-    <!--        <ImageView-->
-    <!--            android:id="@+id/tv_tweet_sender_avatar"-->
-    <!--            android:layout_width="wrap_content"-->
-    <!--            android:layout_height="wrap_content"-->
-    <!--            android:layout_below="@id/tv_tweet_sender_nick" />-->
-    <!--    </RelativeLayout>-->
-
-    <!--    <androidx.recyclerview.widget.RecyclerView-->
-    <!--        android:id="@+id/ry_tweet_comments"-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_below="@id/tv_error" />-->
-
-    <!--    <androidx.recyclerview.widget.RecyclerView-->
-    <!--        android:id="@+id/ry_twee_images"-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_below="@+id/ry_tweet_comments" />-->
 
 </RelativeLayout>
