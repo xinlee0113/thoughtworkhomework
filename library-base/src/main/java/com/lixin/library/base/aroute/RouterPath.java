@@ -1,5 +1,8 @@
 package com.lixin.library.base.aroute;
 
+/**
+ * @author lixin
+ */
 public interface RouterPath {
 
     String BASE_URI_STRING = "arouter://com.lixin.thoughtworkshomework%s";

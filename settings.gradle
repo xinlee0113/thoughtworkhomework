@@ -1,5 +1,4 @@
 include ':module-moments'
-include ':library-res'
 include ':library-base'
 include ':app'
 rootProject.name = "ThoughtWorksHomeWork"

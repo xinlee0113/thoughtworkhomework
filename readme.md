@@ -44,6 +44,7 @@ Json data specification
 3. lint   done
 4. 屏幕适配  done 使用AndroidAutoSize 。成本低。
 5. 图片压缩  done
-6. 单元测试
-7. 架构图、依赖框架
+6. 单元测试  done
+7. 架构图、依赖框架  done
+8 aroute、模块化
 

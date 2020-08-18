@@ -17,11 +17,9 @@ android {
 
         javaCompileOptions {
             annotationProcessorOptions {
-                arguments = ["room.schemaLocation"  : "$projectDir/schemas".toString(),
-                             AROUTER_MODULE_NAME    : project.getName(),
-                             AROUTER_GENERATE_DOC   : 'enable',
-                             "room.incremental"     : 'true',
-                             "room.expandProjection": 'true',
+                arguments = [
+                        AROUTER_MODULE_NAME : project.getName(),
+                        AROUTER_GENERATE_DOC: 'enable',
                 ]
 
             }
@@ -51,10 +49,6 @@ dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation androidx.'appcompat'
     implementation androidx.'constraintlayout'
-    //room
-    implementation androidx.'room'
-    implementation androidx.'room-rxjava2'
-    annotationProcessor androidx.'room-compiler'
 
     //test
     testImplementation 'junit:junit:4.13'
@@ -68,33 +62,6 @@ dependencies {
     androidTestImplementation "org.mockito:mockito-core:2.25.0"
     androidTestImplementation "org.mockito:mockito-android:2.25.0"
     androidTestImplementation 'org.robolectric:annotations:4.4-beta-1'
-
-    //retrofit+rxjava
-    implementation thirdParty.'okhttp'
-    implementation thirdParty.'okhttp-logging-interceptor'
-    implementation thirdParty.'retrofit'
-    implementation thirdParty.'retrofit-adapter-rxjava2'
-    implementation thirdParty.'retrofit-converter-gson'
-    implementation thirdParty.'rxjava'
-    implementation thirdParty.'rxandroid'
-    //Paging 分段加载
-    implementation androidx.'paging'
-    //glide
-    implementation thirdParty.'glide'
-    annotationProcessor thirdParty.'glide-compiler'
-
-    //butterknife
-    implementation thirdParty.'butterknife'
-    annotationProcessor thirdParty.'butterknife-compiler'
-
-    //recycleView
-    implementation thirdParty.'common-adapter'
-    //lifeCycle
-    implementation thirdParty.'rxlifecycle-components'
-
-    //ui
-    implementation thirdParty.'smart-refresh-layout'
-
     //屏幕适配
     /*
     在使用主单位时，design_width_in_dp 和 design_height_in_dp 的单位必须是 dp，
