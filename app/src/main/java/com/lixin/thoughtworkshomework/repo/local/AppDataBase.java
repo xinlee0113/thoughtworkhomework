@@ -1,4 +1,4 @@
-package com.lixin.thoughtworkshomework.repo.local.dao;
+package com.lixin.thoughtworkshomework.repo.local;
 
 import android.content.Context;
 
@@ -17,6 +17,8 @@ import com.lixin.thoughtworkshomework.repo.entity.TweetEntity;
 import com.lixin.thoughtworkshomework.repo.local.converter.CommentConverter;
 import com.lixin.thoughtworkshomework.repo.local.converter.ImageConverter;
 import com.lixin.thoughtworkshomework.repo.local.converter.SenderConverter;
+import com.lixin.thoughtworkshomework.repo.local.dao.ProfileDao;
+import com.lixin.thoughtworkshomework.repo.local.dao.TweetDao;
 
 import java.util.ArrayList;
 import java.util.List;

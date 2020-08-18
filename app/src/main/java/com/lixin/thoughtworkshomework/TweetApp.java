@@ -19,7 +19,7 @@ package com.lixin.thoughtworkshomework;
 import android.app.Application;
 
 import com.lixin.thoughtworkshomework.repo.Repository;
-import com.lixin.thoughtworkshomework.repo.local.dao.AppDataBase;
+import com.lixin.thoughtworkshomework.repo.local.AppDataBase;
 
 
 /**

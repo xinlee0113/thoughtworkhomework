@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -76,7 +77,8 @@ public class TweetFragment extends Fragment {
         bindTweetDataToView();
     }
 
-    private void bindTweetDataToView() {
+    @VisibleForTesting
+    void bindTweetDataToView() {
         //TODO
         //1. 创建TweetListAdapter   PagedListAdapter
         //2. TweetListViewModel

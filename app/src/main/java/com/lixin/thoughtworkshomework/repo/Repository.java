@@ -9,7 +9,7 @@ import androidx.paging.PagedList;
 
 import com.lixin.thoughtworkshomework.repo.entity.ProfileEntity;
 import com.lixin.thoughtworkshomework.repo.entity.TweetEntity;
-import com.lixin.thoughtworkshomework.repo.local.dao.AppDataBase;
+import com.lixin.thoughtworkshomework.repo.local.AppDataBase;
 import com.lixin.thoughtworkshomework.repo.remote.RemoteDataSource;
 
 import java.util.List;

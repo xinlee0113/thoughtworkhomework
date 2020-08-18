@@ -3,6 +3,7 @@ package com.lixin.thoughtworkshomework;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
@@ -28,6 +29,7 @@ public class TweetActivity extends AppCompatActivity {
     /**
      * 显示朋友圈
      */
+    @VisibleForTesting
     void showTweetFragment() {
         if (mTweetFragment == null) {
             mTweetFragment = new TweetFragment();
