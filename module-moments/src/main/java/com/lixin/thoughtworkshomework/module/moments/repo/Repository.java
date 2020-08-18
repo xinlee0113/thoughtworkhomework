@@ -1,4 +1,4 @@
-package com.lixin.thoughtworkshomework.module.repo;
+package com.lixin.thoughtworkshomework.module.moments.repo;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
@@ -7,10 +7,10 @@ import androidx.paging.DataSource;
 import androidx.paging.LivePagedListBuilder;
 import androidx.paging.PagedList;
 
-import com.lixin.thoughtworkshomework.module.repo.entity.ProfileEntity;
-import com.lixin.thoughtworkshomework.module.repo.entity.TweetEntity;
-import com.lixin.thoughtworkshomework.module.repo.local.AppDataBase;
-import com.lixin.thoughtworkshomework.module.repo.remote.RemoteDataSource;
+import com.lixin.thoughtworkshomework.module.moments.repo.entity.ProfileEntity;
+import com.lixin.thoughtworkshomework.module.moments.repo.entity.TweetEntity;
+import com.lixin.thoughtworkshomework.module.moments.repo.local.AppDataBase;
+import com.lixin.thoughtworkshomework.module.moments.repo.remote.RemoteDataSource;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -25,11 +25,11 @@ public class Repository implements IDataSource {
     private final AppDataBase mLocalDataSource;
     @NonNull
     private final RemoteDataSource mRemoteDataSource;
-    private LiveData<PagedList<TweetEntity>> mPagedTweetList;
     /**
      * 十分钟之后判定为需要刷新
      */
-    private RateLimiter<String> rateLimiter;
+    private final RateLimiter<String> rateLimiter;
+    private LiveData<PagedList<TweetEntity>> mPagedTweetList;
 
     private Repository(final AppDataBase database) {
         this.mLocalDataSource = database;
@@ -78,14 +78,14 @@ public class Repository implements IDataSource {
         if (reqFetch || shouldFetch(userName)) {
             mRemoteDataSource.getTweets(new RemoteDataSource.DataCallback<List<TweetEntity>>() {
                 @Override
-                public void onResult(List<TweetEntity> tweetEntities) {
+                public void onSuccess(List<TweetEntity> tweetEntities) {
                     for (TweetEntity tweet : tweetEntities) {
                         mLocalDataSource.tweetDao().save(tweet);
                     }
                 }
 
                 @Override
-                public void onError(Throwable e) {
+                public void onFail(Throwable e) {
                     rateLimiter.reset(userName);
                 }
             });

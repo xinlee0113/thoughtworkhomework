@@ -1,4 +1,4 @@
-package com.lixin.thoughtworkshomework.module.repo.remote;
+package com.lixin.thoughtworkshomework.module.moments.repo.remote;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
@@ -6,9 +6,9 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.paging.LivePagedListBuilder;
 import androidx.paging.PagedList;
 
-import com.lixin.thoughtworkshomework.module.repo.IDataSource;
-import com.lixin.thoughtworkshomework.module.repo.entity.ProfileEntity;
-import com.lixin.thoughtworkshomework.module.repo.entity.TweetEntity;
+import com.lixin.thoughtworkshomework.module.moments.repo.IDataSource;
+import com.lixin.thoughtworkshomework.module.moments.repo.entity.ProfileEntity;
+import com.lixin.thoughtworkshomework.module.moments.repo.entity.TweetEntity;
 
 import java.util.List;
 
@@ -38,7 +38,7 @@ public class RemoteDataSource implements IDataSource {
                 .setPrefetchDistance(5)  //预加载距离：还剩5个就要滑到底了，就进行预加载
                 .build();
 
-        mObservableTweetList = new LivePagedListBuilder<Integer, TweetEntity>
+        mObservableTweetList = new LivePagedListBuilder<>
                 (new RemoteDataSourceStub.Factory(), config).build();
     }
 
@@ -98,14 +98,14 @@ public class RemoteDataSource implements IDataSource {
 
                     @Override
                     public void onNext(@NonNull List<TweetEntity> tweetEntities) {
-                        callback.onResult(tweetEntities);
+                        callback.onSuccess(tweetEntities);
 
                     }
 
                     @Override
                     public void onError(Throwable e) {
 //                                        Log.i(TAG, "fetchTweetList onError=" + e.toString());
-                        callback.onError(e);
+                        callback.onFail(e);
                     }
 
                     @Override
@@ -118,10 +118,14 @@ public class RemoteDataSource implements IDataSource {
     public interface DataCallback<T> {
         /**
          * @param result 返回结果
-         *               用于通过回调返回结果
+         *               成功后返回结果
          */
-        void onResult(T result);
+        void onSuccess(T result);
 
-        void onError(Throwable e);
+        /**
+         * @param e 错误
+         *          失败后返回错误
+         */
+        void onFail(Throwable e);
     }
 }

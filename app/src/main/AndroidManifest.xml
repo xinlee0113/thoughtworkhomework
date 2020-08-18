@@ -33,7 +33,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".module.moments.MomentsActivity"
+            android:name=".module.moments.ui.MomentsActivity"
             android:taskAffinity=".entry" />
     </application>
 

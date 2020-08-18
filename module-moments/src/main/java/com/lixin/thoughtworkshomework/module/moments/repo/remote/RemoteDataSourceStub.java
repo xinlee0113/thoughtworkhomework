@@ -1,4 +1,4 @@
-package com.lixin.thoughtworkshomework.module.repo.remote;
+package com.lixin.thoughtworkshomework.module.moments.repo.remote;
 
 import android.util.Log;
 
@@ -6,7 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.paging.DataSource;
 import androidx.paging.PageKeyedDataSource;
 
-import com.lixin.thoughtworkshomework.module.repo.entity.TweetEntity;
+import com.lixin.thoughtworkshomework.module.moments.repo.entity.TweetEntity;
 
 import java.util.List;
 

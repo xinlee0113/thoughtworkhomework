@@ -5,10 +5,11 @@ package com.lixin.thoughtworkshomework.module.moments.repo.local.dao;
  * @date 2020/8/18.
  */
 class TweetDaoTest {
-    void testQueryTweet(){
+    void testQueryTweet() {
 
     }
-    void testInsertTweet(){
+
+    void testInsertTweet() {
 
     }
 }

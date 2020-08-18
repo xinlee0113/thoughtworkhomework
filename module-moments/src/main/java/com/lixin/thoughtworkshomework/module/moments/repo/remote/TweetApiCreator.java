@@ -1,4 +1,4 @@
-package com.lixin.thoughtworkshomework.module.repo.remote;
+package com.lixin.thoughtworkshomework.module.moments.repo.remote;
 
 import android.util.Log;
 
@@ -32,14 +32,6 @@ public class TweetApiCreator {
                     .addHeader("Accept-Language", "zh-CN")
                     .addHeader("Connection", "close")
                     .addHeader("Content-Type", "application/json");
-//                try {
-//                    String accessToken = getToken();
-//                    if (!TextUtils.isEmpty(accessToken)) {
-//                        builder.addHeader("AUTHORIZATION", accessToken);
-//                    }
-//                } catch (Throwable throwable) {
-//                    //
-//                }
             return chain.proceed(builder.build());
         };
 
@@ -76,11 +68,6 @@ public class TweetApiCreator {
 
         return instance;
     }
-
-//    private String getToken() {
-//        //todo
-//        return null;
-//    }
 
     @NonNull
     public TweetsApi create() {

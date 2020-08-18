@@ -1,11 +1,12 @@
-package com.lixin.thoughtworkshomework.module.repo;
+package com.lixin.thoughtworkshomework.module.moments.repo;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.paging.PagedList;
 
-import com.lixin.thoughtworkshomework.module.repo.entity.ProfileEntity;
-import com.lixin.thoughtworkshomework.module.repo.entity.TweetEntity;
+import com.lixin.thoughtworkshomework.module.moments.repo.entity.ProfileEntity;
+import com.lixin.thoughtworkshomework.module.moments.repo.entity.TweetEntity;
+
 
 /**
  * @author lixin
@@ -28,5 +29,5 @@ public interface IDataSource {
      * 获取朋友圈列表
      */
     @NonNull
-    LiveData<PagedList<TweetEntity>> getTweets(String userName,boolean fetch);
+    LiveData<PagedList<TweetEntity>> getTweets(String userName, boolean fetch);
 }

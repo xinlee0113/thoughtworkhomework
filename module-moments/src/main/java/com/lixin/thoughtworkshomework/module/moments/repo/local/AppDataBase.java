@@ -1,4 +1,4 @@
-package com.lixin.thoughtworkshomework.module.repo.local;
+package com.lixin.thoughtworkshomework.module.moments.repo.local;
 
 import android.content.Context;
 
@@ -12,13 +12,13 @@ import androidx.room.TypeConverters;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.lixin.thoughtworkshomework.AppExecutors;
-import com.lixin.thoughtworkshomework.module.repo.entity.ProfileEntity;
-import com.lixin.thoughtworkshomework.module.repo.local.dao.ProfileDao;
-import com.lixin.thoughtworkshomework.module.repo.local.dao.TweetDao;
-import com.lixin.thoughtworkshomework.module.repo.entity.TweetEntity;
-import com.lixin.thoughtworkshomework.module.repo.local.converter.CommentConverter;
-import com.lixin.thoughtworkshomework.module.repo.local.converter.ImageConverter;
-import com.lixin.thoughtworkshomework.module.repo.local.converter.SenderConverter;
+import com.lixin.thoughtworkshomework.module.moments.repo.entity.ProfileEntity;
+import com.lixin.thoughtworkshomework.module.moments.repo.entity.TweetEntity;
+import com.lixin.thoughtworkshomework.module.moments.repo.local.converter.CommentConverter;
+import com.lixin.thoughtworkshomework.module.moments.repo.local.converter.ImageConverter;
+import com.lixin.thoughtworkshomework.module.moments.repo.local.converter.SenderConverter;
+import com.lixin.thoughtworkshomework.module.moments.repo.local.dao.ProfileDao;
+import com.lixin.thoughtworkshomework.module.moments.repo.local.dao.TweetDao;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -67,8 +67,14 @@ abstract public class AppDataBase extends RoomDatabase {
                 .build();
     }
 
+    /**
+     * @return 个人简介Dao
+     */
     public abstract ProfileDao profileDao();
 
+    /**
+     * @return TweetDao
+     */
     public abstract TweetDao tweetDao();
 
     private void setDatabaseCreated() {

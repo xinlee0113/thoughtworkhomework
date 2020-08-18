@@ -2,6 +2,9 @@ package com.lixin.library.base.utils;
 
 import android.app.Application;
 
+/**
+ * @author lixin
+ */
 public class ContextUtils {
     private static Application application;
 

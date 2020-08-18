@@ -2,8 +2,6 @@ package com.lixin.thoughtworkshomework.module.moments.ui;
 
 import androidx.fragment.app.testing.FragmentScenario;
 
-import com.lixin.thoughtworkshomework.module.moments.MomentsFragment;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

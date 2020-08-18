@@ -1,4 +1,4 @@
-package com.lixin.thoughtworkshomework.module.repo.entity;
+package com.lixin.thoughtworkshomework.module.moments.repo.entity;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
@@ -40,18 +40,22 @@ public class ProfileEntity {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         ProfileEntity that = (ProfileEntity) o;
         return
-                Objects.equals(profileImg, that.profileImg) &&
-                Objects.equals(avatar, that.avatar) &&
-                Objects.equals(nick, that.nick) &&
-                Objects.equals(userName, that.userName);
+                profileImg.equals(that.profileImg) &&
+                        avatar.equals(that.avatar) &&
+                        nick.equals(that.nick) &&
+                        userName.equals(that.userName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash( profileImg, avatar, nick, userName);
+        return Objects.hash(profileImg, avatar, nick, userName);
     }
 }

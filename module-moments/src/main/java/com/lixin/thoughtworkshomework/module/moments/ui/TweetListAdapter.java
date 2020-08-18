@@ -1,4 +1,4 @@
-package com.lixin.thoughtworkshomework.module.moments;
+package com.lixin.thoughtworkshomework.module.moments.ui;
 
 import android.graphics.Typeface;
 import android.text.SpannableString;
@@ -24,7 +24,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.lixin.module.moments.R;
-import com.lixin.thoughtworkshomework.module.repo.entity.TweetEntity;
+import com.lixin.thoughtworkshomework.module.moments.repo.entity.TweetEntity;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -77,12 +77,12 @@ public class TweetListAdapter extends PagedListAdapter<TweetEntity, TweetListAda
 
     public static class TweetViewHolder extends RecyclerView.ViewHolder {
         private static final String TAG = "TweetViewHolder";
-        TextView tvContent;
+        final TextView tvContent;
         //        TextView tvTweetSenderName;
-        TextView tvTweetSenderNick;
-        ImageView imgTweetSenderAvatar;
-        RecyclerView ryComments;
-        RecyclerView ryImages;
+        final TextView tvTweetSenderNick;
+        final ImageView imgTweetSenderAvatar;
+        final RecyclerView ryComments;
+        final RecyclerView ryImages;
 
 
         BaseQuickAdapter<TweetEntity.Image, BaseViewHolder> tweetImgAdapter;
@@ -90,11 +90,11 @@ public class TweetListAdapter extends PagedListAdapter<TweetEntity, TweetListAda
 
         public TweetViewHolder(@NonNull View itemView) {
             super(itemView);
-            tvContent = (TextView) itemView.findViewById(R.id.tv_tweet_content);
-            ryImages = (RecyclerView) itemView.findViewById(R.id.ry_tweet_images);
-            ryComments = (RecyclerView) itemView.findViewById(R.id.ry_tweet_comments);
-            tvTweetSenderNick = (TextView) itemView.findViewById(R.id.tv_tweet_sender_nick);
-            imgTweetSenderAvatar = (ImageView) itemView.findViewById(R.id.tv_tweet_sender_avatar);
+            tvContent = itemView.findViewById(R.id.tv_tweet_content);
+            ryImages = itemView.findViewById(R.id.ry_tweet_images);
+            ryComments = itemView.findViewById(R.id.ry_tweet_comments);
+            tvTweetSenderNick = itemView.findViewById(R.id.tv_tweet_sender_nick);
+            imgTweetSenderAvatar = itemView.findViewById(R.id.tv_tweet_sender_avatar);
         }
 
         public void bindTo(@NonNull TweetEntity item) {

@@ -1,4 +1,4 @@
-package com.lixin.thoughtworkshomework.module.moments;
+package com.lixin.thoughtworkshomework.module.moments.ui;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
@@ -6,10 +6,10 @@ import androidx.paging.PagedList;
 
 import com.lixin.library.base.utils.ContextUtils;
 import com.lixin.thoughtworkshomework.AppExecutors;
-import com.lixin.thoughtworkshomework.module.repo.Repository;
-import com.lixin.thoughtworkshomework.module.repo.entity.ProfileEntity;
-import com.lixin.thoughtworkshomework.module.repo.entity.TweetEntity;
-import com.lixin.thoughtworkshomework.module.repo.local.AppDataBase;
+import com.lixin.thoughtworkshomework.module.moments.repo.Repository;
+import com.lixin.thoughtworkshomework.module.moments.repo.entity.ProfileEntity;
+import com.lixin.thoughtworkshomework.module.moments.repo.entity.TweetEntity;
+import com.lixin.thoughtworkshomework.module.moments.repo.local.AppDataBase;
 
 /**
  * @author lixin

@@ -21,8 +21,6 @@ import android.app.Application;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.lixin.library.base.utils.ContextUtils;
 import com.lixin.module.moments.BuildConfig;
-import com.lixin.thoughtworkshomework.module.repo.Repository;
-import com.lixin.thoughtworkshomework.module.repo.local.AppDataBase;
 
 
 /**

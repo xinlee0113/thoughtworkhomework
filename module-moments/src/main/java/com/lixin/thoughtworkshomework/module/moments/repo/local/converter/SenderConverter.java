@@ -1,10 +1,10 @@
-package com.lixin.thoughtworkshomework.module.repo.local.converter;
+package com.lixin.thoughtworkshomework.module.moments.repo.local.converter;
 
 import androidx.annotation.Nullable;
 import androidx.room.TypeConverter;
 
 import com.google.gson.Gson;
-import com.lixin.thoughtworkshomework.module.repo.entity.TweetEntity;
+import com.lixin.thoughtworkshomework.module.moments.repo.entity.TweetEntity;
 
 import java.io.IOException;
 import java.util.List;

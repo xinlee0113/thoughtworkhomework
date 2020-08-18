@@ -1,4 +1,4 @@
-package com.lixin.thoughtworkshomework.module.repo;
+package com.lixin.thoughtworkshomework.module.moments.repo;
 
 import android.os.SystemClock;
 
@@ -10,8 +10,8 @@ import java.util.concurrent.TimeUnit;
  * @date 2020/8/17.
  */
 public class RateLimiter<KEY> {
-    Long timeout;
-    HashMap<KEY, Long> timestamps;
+    final Long timeout;
+    final HashMap<KEY, Long> timestamps;
 
     public RateLimiter(int timeout, TimeUnit timeUnit) {
         this.timeout = timeUnit.toMillis(timeout);

@@ -10,12 +10,12 @@ public interface RouterPath {
     interface Activity {
         String ENTRY = "/stub/EntryActivity";
 
-        String MOMENTS = "/moments/TweetActivity";
+        String MOMENTS = "/module/moments/TweetActivity";
     }
 
     interface Fragment {
         // tweet
-        String TWEET = "/moments/TweetFragment";
+        String TWEET = "/module/moments/TweetFragment";
 
     }
 }

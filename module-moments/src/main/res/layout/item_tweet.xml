@@ -12,8 +12,10 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
+        android:layout_marginStart="@dimen/margin_left_tweet_sender_avatar"
         android:layout_marginLeft="@dimen/margin_left_tweet_sender_avatar"
         android:layout_marginTop="@dimen/margin_end_tweet_sender_avatar"
+        android:contentDescription="TODO"
         android:src="@drawable/icon_head" />
 
     <TextView
@@ -21,8 +23,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/tv_tweet_sender_avatar"
+        android:layout_marginStart="@dimen/margin_left_tweet_sender_nick"
         android:layout_marginLeft="@dimen/margin_left_tweet_sender_nick"
         android:layout_marginTop="@dimen/margin_top_tweet_sender_nick"
+        android:layout_toEndOf="@id/tv_tweet_sender_avatar"
         android:layout_toRightOf="@id/tv_tweet_sender_avatar"
         android:textColor="@color/color_tweet_sender_nick"
         android:textStyle="bold" />
@@ -32,8 +36,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/tv_tweet_sender_nick"
+        android:layout_marginStart="@dimen/margin_left_tweet_content"
         android:layout_marginLeft="@dimen/margin_left_tweet_content"
         android:layout_marginTop="@dimen/margin_top_tweet_content"
+        android:layout_toEndOf="@id/tv_tweet_sender_avatar"
         android:layout_toRightOf="@id/tv_tweet_sender_avatar" />
 
     <androidx.recyclerview.widget.RecyclerView
@@ -41,7 +47,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/tv_tweet_content"
+        android:layout_marginStart="@dimen/margin_left_tweet_images"
         android:layout_marginLeft="@dimen/margin_left_tweet_images"
+        android:layout_toEndOf="@id/tv_tweet_sender_avatar"
         android:layout_toRightOf="@id/tv_tweet_sender_avatar"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:spanCount="3" />
@@ -51,7 +59,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/ry_tweet_images"
+        android:layout_marginStart="@dimen/margin_left_tweet_comments"
         android:layout_marginLeft="@dimen/margin_left_tweet_comments"
+        android:layout_toEndOf="@id/tv_tweet_sender_avatar"
         android:layout_toRightOf="@id/tv_tweet_sender_avatar" />
 
     <!--    <TextView-->

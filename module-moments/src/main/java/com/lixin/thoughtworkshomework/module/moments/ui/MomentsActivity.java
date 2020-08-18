@@ -1,4 +1,4 @@
-package com.lixin.thoughtworkshomework.module.moments;
+package com.lixin.thoughtworkshomework.module.moments.ui;
 
 import android.os.Bundle;
 
@@ -44,9 +44,6 @@ public class MomentsActivity extends BaseActivity {
         if (mMomentsFragment == null) {
             mMomentsFragment = new MomentsFragment();
         }
-//        getSupportFragmentManager().beginTransaction()
-//                .add(R.id.fragment_container, mTweetFragment, TweetFragment.TAG).commit();
-
 
         Fragment tweetFragment = (MomentsFragment) ARouter.getInstance()
                 .build(RouterPath.Fragment.TWEET)

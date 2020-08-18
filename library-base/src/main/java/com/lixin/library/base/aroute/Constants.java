@@ -24,7 +24,7 @@ public interface Constants {
             /**
              * 朋友圈
              */
-            int MOMENTS =1;
+            int MOMENTS = 1;
         }
     }
 }

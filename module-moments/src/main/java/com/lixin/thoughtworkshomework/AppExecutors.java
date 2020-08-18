@@ -35,22 +35,8 @@ import java.util.concurrent.Executors;
  */
 public class AppExecutors {
     private static AppExecutors sInstance;
-
-    public static AppExecutors getInstance() {
-        synchronized (AppExecutors.class) {
-            if (sInstance == null) {
-                synchronized (AppExecutors.class) {
-                    sInstance = new AppExecutors();
-                }
-            }
-        }
-        return sInstance;
-    }
-
     private final Executor mDiskIO;
-
     private final Executor mNetworkIO;
-
     private final Executor mMainThread;
 
     private AppExecutors(Executor diskIO, Executor networkIO, Executor mainThread) {
@@ -62,6 +48,17 @@ public class AppExecutors {
     private AppExecutors() {
         this(Executors.newSingleThreadExecutor(), Executors.newFixedThreadPool(3),
                 new MainThreadExecutor());
+    }
+
+    public static AppExecutors getInstance() {
+        synchronized (AppExecutors.class) {
+            if (sInstance == null) {
+                synchronized (AppExecutors.class) {
+                    sInstance = new AppExecutors();
+                }
+            }
+        }
+        return sInstance;
     }
 
     public Executor diskIO() {

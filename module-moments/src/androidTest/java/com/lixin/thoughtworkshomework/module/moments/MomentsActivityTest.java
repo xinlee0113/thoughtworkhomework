@@ -7,6 +7,7 @@ import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.lixin.module.moments.R;
+import com.lixin.thoughtworkshomework.module.moments.ui.MomentsActivity;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -22,11 +23,10 @@ import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
  */
 @RunWith(AndroidJUnit4.class)
 public class MomentsActivityTest implements JunitTestContract {
-    private String TAG = "TweetActivityTest";
-
     @Rule
-    public ActivityScenarioRule<com.lixin.thoughtworkshomework.module.moments.MomentsActivity> activityRule =
-            new ActivityScenarioRule<>(com.lixin.thoughtworkshomework.module.moments.MomentsActivity.class);
+    public final ActivityScenarioRule<MomentsActivity> activityRule =
+            new ActivityScenarioRule<>(MomentsActivity.class);
+    private final String TAG = "TweetActivityTest";
 
     @Override
     public void prepare() {
@@ -43,7 +43,7 @@ public class MomentsActivityTest implements JunitTestContract {
         Log.i(TAG, "testReplaceFragment");
         onView(ViewMatchers.withId(R.id.fragment_container)).check(matches(isDisplayed()));
         activityRule.getScenario().recreate();
-        activityRule.getScenario().onActivity(com.lixin.thoughtworkshomework.module.moments.MomentsActivity::showTweetFragment);
+        activityRule.getScenario().onActivity(MomentsActivity::showTweetFragment);
 
 
     }

@@ -1,12 +1,12 @@
-package com.lixin.thoughtworkshomework.module.repo.entity;
+package com.lixin.thoughtworkshomework.module.moments.repo.entity;
 
 import androidx.annotation.Nullable;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
 
-import com.lixin.thoughtworkshomework.module.repo.local.converter.CommentConverter;
-import com.lixin.thoughtworkshomework.module.repo.local.converter.ImageConverter;
+import com.lixin.thoughtworkshomework.module.moments.repo.local.converter.CommentConverter;
+import com.lixin.thoughtworkshomework.module.moments.repo.local.converter.ImageConverter;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -35,6 +35,30 @@ public class TweetEntity {
     public String error;
     public String unknown_error;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof TweetEntity)) {
+            return false;
+        }
+        TweetEntity entity = (TweetEntity) o;
+        return
+                userName.equals(entity.userName) &&
+                        content.equals(entity.content) &&
+                        images == entity.images &&
+                        sender == entity.sender &&
+                        comments == entity.comments &&
+                        error.equals(entity.error) &&
+                        unknown_error.equals(entity.unknown_error);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(userName, content, images, sender, comments, error, unknown_error);
+    }
+
     public static class Comment {
         public String content;
         public Sender sender;
@@ -47,6 +71,24 @@ public class TweetEntity {
                     ", sender=" + sender +
                     '}';
         }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) {
+                return true;
+            }
+            if (!(o instanceof Comment)) {
+                return false;
+            }
+            Comment comment = (Comment) o;
+            return content.equals(comment.content) &&
+                    sender.equals(comment.sender);
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(content, sender);
+        }
     }
 
     public static class Image {
@@ -58,6 +100,23 @@ public class TweetEntity {
             return "Image{" +
                     "url='" + url + '\'' +
                     '}';
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) {
+                return true;
+            }
+            if (!(o instanceof Image)) {
+                return false;
+            }
+            Image image = (Image) o;
+            return url.equals(image.url);
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(url);
         }
     }
 
@@ -75,25 +134,5 @@ public class TweetEntity {
                     ", avatar='" + avatar + '\'' +
                     '}';
         }
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof TweetEntity)) return false;
-        TweetEntity entity = (TweetEntity) o;
-        return
-                Objects.equals(userName, entity.userName) &&
-                Objects.equals(content, entity.content) &&
-                Objects.equals(images, entity.images) &&
-                Objects.equals(sender, entity.sender) &&
-                Objects.equals(comments, entity.comments) &&
-                Objects.equals(error, entity.error) &&
-                Objects.equals(unknown_error, entity.unknown_error);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash( userName, content, images, sender, comments, error, unknown_error);
     }
 }

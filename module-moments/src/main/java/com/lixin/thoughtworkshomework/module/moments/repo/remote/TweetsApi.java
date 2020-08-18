@@ -1,9 +1,9 @@
-package com.lixin.thoughtworkshomework.module.repo.remote;
+package com.lixin.thoughtworkshomework.module.moments.repo.remote;
 
 import androidx.annotation.NonNull;
 
-import com.lixin.thoughtworkshomework.module.repo.entity.ProfileEntity;
-import com.lixin.thoughtworkshomework.module.repo.entity.TweetEntity;
+import com.lixin.thoughtworkshomework.module.moments.repo.entity.ProfileEntity;
+import com.lixin.thoughtworkshomework.module.moments.repo.entity.TweetEntity;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.lixin.thoughtworkshomework.module.moments;
+package com.lixin.thoughtworkshomework.module.moments.ui;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -27,6 +27,8 @@ import com.lixin.module.moments.R;
 import com.lixin.module.moments.R2;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 
+import java.util.Objects;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -40,7 +42,6 @@ import butterknife.Unbinder;
 @Route(path = RouterPath.Fragment.TWEET)
 public class MomentsFragment extends Fragment {
     public static final String TAG = "TweetFragment";
-    private final String userName = "jsmith";
 
     @Autowired(name = Constants.EntryParams.KEY)
     int entryCode = Constants.EntryParams.Code.DEFAULT;
@@ -62,12 +63,6 @@ public class MomentsFragment extends Fragment {
     RecyclerView mRyTweetList;
     private MomentsViewModel mMomentsViewModel;
     private Unbinder mButterKnifeBinder;
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        Log.i(TAG, "onActivityCreated");
-    }
 
     @Nullable
     @Override
@@ -97,7 +92,7 @@ public class MomentsFragment extends Fragment {
         //3. 数据加载策略
 
         TweetListAdapter adapter = new TweetListAdapter();
-        mRyTweetList.setAdapter(adapter);
+        Objects.requireNonNull(mRyTweetList).setAdapter(adapter);
         mRyTweetList.setLayoutManager(new LinearLayoutManager(requireContext()));
         mRyTweetList.setNestedScrollingEnabled(true);
         mMomentsViewModel.getObservableTweetList("jsmith", false).observe(requireActivity(), pagedList -> {
@@ -107,16 +102,17 @@ public class MomentsFragment extends Fragment {
 
     private void bindProfileDataToView() {
         Log.i(TAG, "listenToDataChanged");
+        String userName = "jsmith";
         mMomentsViewModel.getObservableProfile(userName).observe(getViewLifecycleOwner(), profileEntity -> {
             Log.i(TAG, "listenToDataChanged onChanged profileEntity=" + profileEntity);
             Log.e(TAG, "profile img can not be used, =" + profileEntity.profileImg);
-            mTvNick.setText(profileEntity.nick);
+            Objects.requireNonNull(mTvNick).setText(profileEntity.nick);
             //设置图片圆角角度
             RoundedCorners roundedCorners = new RoundedCorners(10);
             RequestOptions options = RequestOptions.bitmapTransform(roundedCorners).override(300, 100);
 
-            Glide.with(MomentsFragment.this).load(profileEntity.profileImg).error(R.drawable.icon_head_bg).into(mImgProfile);
-            Glide.with(MomentsFragment.this).load(profileEntity.avatar).apply(options).error(R.drawable.icon_head).into(mImgAvatar);
+            Glide.with(MomentsFragment.this).load(profileEntity.profileImg).error(R.drawable.icon_head_bg).into(Objects.requireNonNull(mImgProfile));
+            Glide.with(MomentsFragment.this).load(profileEntity.avatar).apply(options).error(R.drawable.icon_head).into(Objects.requireNonNull(mImgAvatar));
         });
     }
 

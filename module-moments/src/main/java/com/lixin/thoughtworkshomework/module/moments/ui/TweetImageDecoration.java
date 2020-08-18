@@ -1,8 +1,9 @@
-package com.lixin.thoughtworkshomework.module.moments;
+package com.lixin.thoughtworkshomework.module.moments.ui;
 
 import android.graphics.Rect;
 import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 /**
@@ -14,15 +15,15 @@ class TweetImageDecoration extends RecyclerView.ItemDecoration {
     /**
      * 列数
      */
-    private int spanCount;
+    private final int spanCount;
     /**
      * 间隔
      */
-    private int spacing;
+    private final int spacing;
     /**
      * 是否包含边缘
      */
-    private boolean includeEdge;
+    private final boolean includeEdge;
 
     public TweetImageDecoration(int spanCount, int spacing, boolean includeEdge) {
         this.spanCount = spanCount;
@@ -31,7 +32,7 @@ class TweetImageDecoration extends RecyclerView.ItemDecoration {
     }
 
     @Override
-    public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
+    public void getItemOffsets(@NonNull Rect outRect, @NonNull View view, RecyclerView parent, @NonNull RecyclerView.State state) {
 
         //这里是关键，需要根据你有几列来判断
         int position = parent.getChildAdapterPosition(view); // item position
