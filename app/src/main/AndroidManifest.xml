@@ -20,13 +20,21 @@
             android:name="design_height_in_dp"
             android:value="731" />
 
-        <activity android:name=".TweetActivity">
+        <activity
+            android:name=".stub.EntryActivity"
+            android:excludeFromRecents="true"
+            android:exported="true"
+            android:taskAffinity=".entry"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".module.moments.MomentsActivity"
+            android:taskAffinity=".entry" />
     </application>
 
 </manifest>

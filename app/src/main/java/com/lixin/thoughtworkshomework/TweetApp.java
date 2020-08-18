@@ -18,8 +18,11 @@ package com.lixin.thoughtworkshomework;
 
 import android.app.Application;
 
-import com.lixin.thoughtworkshomework.repo.Repository;
-import com.lixin.thoughtworkshomework.repo.local.AppDataBase;
+import com.alibaba.android.arouter.launcher.ARouter;
+import com.lixin.library.base.utils.ContextUtils;
+import com.lixin.module.moments.BuildConfig;
+import com.lixin.thoughtworkshomework.module.repo.Repository;
+import com.lixin.thoughtworkshomework.module.repo.local.AppDataBase;
 
 
 /**
@@ -30,7 +33,6 @@ import com.lixin.thoughtworkshomework.repo.local.AppDataBase;
 public class TweetApp extends Application {
 
     private static TweetApp sInstance;
-    private AppExecutors mAppExecutors;
 
     public static TweetApp getInstance() {
         return sInstance;
@@ -39,20 +41,28 @@ public class TweetApp extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        mAppExecutors = new AppExecutors();
+        initLibs();
         sInstance = this;
     }
 
-    //
-    public AppDataBase getDatabase() {
-        return AppDataBase.getInstance(this, mAppExecutors);
+    private void initLibs() {
+        ContextUtils.init(this);
+        initARouter();
     }
 
-    public Repository getRepository() {
-        return Repository.getInstance(getDatabase());
+    /**
+     * 初始化ARouter
+     */
+    private void initARouter() {
+        // 这两行必须写在init之前，否则这些配置在init过程中将无效
+        if (BuildConfig.DEBUG) {
+            // 打印日志
+            ARouter.openLog();
+            // 开启调试模式(如果在InstantRun模式下运行，必须开启调试模式！线上版本需要关闭,否则有安全风险)
+            ARouter.openDebug();
+        }
+        ARouter.init(this);
     }
 
-    public AppExecutors getAppExecutors() {
-        return mAppExecutors;
-    }
+
 }
