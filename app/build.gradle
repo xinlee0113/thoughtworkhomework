@@ -45,27 +45,26 @@ dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation 'androidx.appcompat:appcompat:1.3.0-alpha01'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation project(path: ':module-moments')
     debugImplementation 'androidx.fragment:fragment-testing:1.3.0-alpha07'
 
 
     //test
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-    //espresso,测试ui
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
-    androidTestImplementation 'androidx.test:runner:1.1.0'
-    androidTestImplementation 'androidx.test:rules:1.1.0'
-
-
-    // Optional -- Robolectric environment
-    testImplementation 'androidx.test:core:1.0.0'
-    // Optional -- Mockito framework
+    testImplementation 'junit:junit:4.13'
+    testImplementation 'androidx.test:core:1.2.0'
     testImplementation 'org.mockito:mockito-core:1.10.19'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    androidTestImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation 'androidx.test:rules:1.2.0'
     androidTestImplementation "org.mockito:mockito-core:2.25.0"
     androidTestImplementation "org.mockito:mockito-android:2.25.0"
-//    androidTestImplementation "org.mockito:mockito-all:1.10.19"
-    androidTestImplementation 'org.robolectric:annotations:4.4-alpha-2'
+    androidTestImplementation 'org.robolectric:annotations:4.4-beta-1'
 
+    //room
+    implementation androidx.'room'
+    implementation androidx.'room-rxjava2'
+    annotationProcessor androidx.'room-compiler'
 
     //retrofit+rxjava
     implementation thirdParty.'okhttp'
@@ -75,38 +74,32 @@ dependencies {
     implementation thirdParty.'retrofit-converter-gson'
     implementation thirdParty.'rxjava'
     implementation thirdParty.'rxandroid'
+    //Paging 分段加载
+    implementation androidx.'paging'
+    //glide
+    implementation thirdParty.'glide'
+    annotationProcessor thirdParty.'glide-compiler'
+
+    //butterknife
+    implementation thirdParty.'butterknife'
+    annotationProcessor thirdParty.'butterknife-compiler'
 
     //recycleView
-    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.4'
-
+    implementation thirdParty.'common-adapter'
     //lifeCycle
     implementation thirdParty.'rxlifecycle-components'
 
-    //room
-    implementation androidx.'room'
-    implementation androidx.'room-rxjava2'
-    annotationProcessor androidx.'room-compiler'
-    //glide
-    implementation 'com.github.bumptech.glide:glide:4.11.0'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
-
-    //butterknife
-    implementation 'com.jakewharton:butterknife:10.2.3'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.3'
-
-    //Paging 分段加载
-    implementation 'android.arch.paging:runtime:2.1.1'
-
     //ui
-    implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.2'
+    implementation thirdParty.'smart-refresh-layout'
 
     //屏幕适配
-    implementation 'me.jessyan:autosize:1.1.2'
-    api 'me.jessyan:autosize:1.1.2'
+    implementation thirdParty.'auto-size'
     /*
     在使用主单位时，design_width_in_dp 和 design_height_in_dp 的单位必须是 dp，
     计算公式 dp = px / (DPI / 160) 将 px 尺寸转换为 dp 尺寸，
     如果实在找不到设备的 DPI 那就直接将 px 尺寸除以 3 或者 2 。
      */
+
+
 
 }
